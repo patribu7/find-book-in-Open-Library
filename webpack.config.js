@@ -1,9 +1,10 @@
 'use strict'
 
-const autoprefixer = require('autoprefixer');
 const path = require('path');
+const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
@@ -34,8 +35,8 @@ module.exports = {
         test: /\.(scss)$/,
         use: [
           {
-            // Adds CSS to the DOM by injecting a `<style>` tag
-            loader: 'style-loader'
+            // Extracts CSS for each JS file that includes CSS
+            loader: miniCssExtractPlugin.loader
           },
           {
             // Interprets `@import` and `url()` like `import/require()` and will resolve them
@@ -67,6 +68,7 @@ module.exports = {
       template: path.resolve(__dirname, "./src/template.html"),
       filename: 'index.html',
     }),
+    new miniCssExtractPlugin(),
     new CleanWebpackPlugin()
   ],
 };
