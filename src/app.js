@@ -1,4 +1,4 @@
-import Seeker from './component';
+import './component';
 
 import './style.css';
 
@@ -19,5 +19,3 @@ import * as bootstrap from 'bootstrap';
 
 
 //----------------------------//
-let request = new Seeker('https://openlibrary.org/', 'subjects/', 'fantasy');
-request.get();

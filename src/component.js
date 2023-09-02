@@ -1,6 +1,14 @@
 let testUrl = "https://openlibrary.org/subjects/fantasy.json";
 
-export default class Seeker {
+class Library {
+    constructor(title, authors, imgUrl, available) {
+        this.title = title;
+        this.authors = authors;
+        this.imgUrl = imgUrl;
+        this.available = available
+    }
+}
+class Seeker {
     constructor(urlSite, type, search) {
         this.urlSite = urlSite;
         this.type = type;
@@ -11,16 +19,13 @@ export default class Seeker {
     async get() {
         const response = await fetch(this.url);
         const response_json = await response.json();
-        this.books = response_json.works
+        this.books = response_json.works;
+        console.log(this.books)
     }
-}
 
-class BookCard {
-    constructor(title, authors, imgUrl, available) {
-        this.title = title;
-        this.authors = authors;
-        this.imgUrl = imgUrl;
-        this.free = free;
-        this.available = available
-    }
-}
+};
+
+let request = new Seeker('https://openlibrary.org/', 'subjects/', 'fantasy');
+request.get();
+
+let library = new Library(request.books)
