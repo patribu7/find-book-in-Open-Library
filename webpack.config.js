@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path');
+const webpack = require("webpack");
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -69,6 +70,12 @@ module.exports = {
       filename: 'index.html',
     }),
     new miniCssExtractPlugin(),
+
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
+
     new CleanWebpackPlugin()
   ],
 };
