@@ -1,4 +1,4 @@
-import component from './component';
+import Seeker from './component';
 
 import './style.css';
 
@@ -16,3 +16,8 @@ import * as bootstrap from 'bootstrap';
 
 // // or, specify which plugins you need:
 // import { Tooltip, Toast, Popover } from 'bootstrap'
+
+
+//----------------------------//
+let request = new Seeker('https://openlibrary.org/', 'subjects/', 'fantasy');
+request.get();
