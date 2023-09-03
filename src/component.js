@@ -1,13 +1,6 @@
-let testUrl = "https://openlibrary.org/subjects/fantasy.json";
+const imgSize = 'M';
+let library = [];
 
-class Library {
-    constructor(title, authors, imgUrl, available) {
-        this.title = title;
-        this.authors = authors;
-        this.imgUrl = imgUrl;
-        this.available = available
-    }
-}
 class Seeker {
     constructor(urlSite, type, search) {
         this.urlSite = urlSite;
@@ -19,13 +12,19 @@ class Seeker {
     async get() {
         const response = await fetch(this.url);
         const response_json = await response.json();
-        this.books = response_json.works;
-        console.log(this.books)
-    }
+        response_json.works.forEach(book => {
+            book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.imgId + '-' + imgSize + '.jpg';
+            book.authorsList = [];
+            book.authors.forEach(author =>
+                book.authorsList.push(author.name)
+            );
+            library.push(book)
 
-};
+        });
+    }
+}
 
 let request = new Seeker('https://openlibrary.org/', 'subjects/', 'fantasy');
 request.get();
 
-let library = new Library(request.books)
+console.log(library)
