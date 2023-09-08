@@ -1,30 +1,46 @@
+const searchInput = document.getElementById('search-input');
+const searchSelectType = document.getElementById('search-type');
+
+const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
-let library = [];
+
 
 class Seeker {
     constructor(urlSite, type, search) {
         this.urlSite = urlSite;
         this.type = type;
         this.search = search;
-        this.url = urlSite + type + search + ".json";
+        this.url = urlSite + '/' + type + '/' + search + ".json";
+        // this.library = []
+
     }
-    
-    async get() {
+    async getLibrary() {
         const response = await fetch(this.url);
-        const response_json = await response.json();
-        response_json.works.forEach(book => {
+        const books = await response.json();
+        books.works.forEach(book => {
             book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.imgId + '-' + imgSize + '.jpg';
             book.authorsList = [];
-            book.authors.forEach(author =>
-                book.authorsList.push(author.name)
-            );
-            library.push(book)
-
-        });
+            book.authors.forEach(author => book.authorsList.push(author.name));
+        })
+        return books.works
     }
+    async createCards() {
+        let library = await this.getLibrary();
+        library.forEach(book => {
+            console.log(book.title, book.authorsList, book.imgUrl)
+            
+        });
+     }
 }
 
-let request = new Seeker('https://openlibrary.org/', 'subjects/', 'fantasy');
-request.get();
 
-console.log(library)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        let research = new Seeker(urlSite, searchSelectType.value, 'fantasy');
+        research.createCards()
+
+
+
+
+    }
+})
