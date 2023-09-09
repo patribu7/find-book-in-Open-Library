@@ -1,8 +1,12 @@
+const filterReport = document.getElementById('filter-report');
 const searchInput = document.getElementById('search-input');
 const searchSelectType = document.getElementById('search-type');
 const cardsPlace = document.getElementById('cards-place');
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
+let numBookFind = 0;
+
+filterReport.innerHTML = `trovati ${numBookFind} libri`; 
 
 const urlTest = 'https://openlibrary.org/subjects/fantasy.json';
 
@@ -23,20 +27,18 @@ class SearchParameters {
 
 }
 
-async function setProperty(books) {
-    books = await books;
-    books = books.works;
+ function setProperty(books) {
     books.forEach(book => {
         book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
         book.authorsList = [];
         book.authors.forEach(author => book.authorsList.push(author.name));
     });
+    return books
 
 }
 
-async function createCards(books) {
-    books = await books;
-    books = books.works;
+ function createCards(books) {
+
     books.forEach(book => {
         let card = document.createElement('div');
         card.classList.add('card');
@@ -52,16 +54,17 @@ async function createCards(books) {
         card.addEventListener('click', () => {
             let searchBookProperty = new SearchParameters(urlSite, '', book.key);
             let bookProprety = searchBookProperty.get();
-            let foo = async () => {
+            let printDescription = async () => {
                 bookProprety = await bookProprety
                 
                 console.log(bookProprety.description)
             }
-            foo()
+            printDescription()
 
         })
 
     });
+
 
 }
 
@@ -70,10 +73,13 @@ async function createCards(books) {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         let research = new SearchParameters(urlSite, searchSelectType.value, 'fantasy');
-        let books = research.get();
-        setProperty(books);
-        createCards(books)
-    
+        research.get()
+        .then(books => setProperty(books.works))
+        .then(books => {
+            createCards(books); console.log(books.length)
+        })
+
+        
 
 
     }
