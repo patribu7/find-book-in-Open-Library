@@ -1,11 +1,11 @@
 const filterReport = document.getElementById('filter-report');
+filterReport.innerHTML = `trovati 0 libri`; 
 const searchInput = document.getElementById('search-input');
 const searchSelectType = document.getElementById('search-type');
 const cardsPlace = document.getElementById('cards-place');
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
 
-filterReport.innerHTML = `trovati 0 libri`; 
 
 class SearchParameters {
     constructor(urlSite, type, search) {
@@ -24,19 +24,20 @@ class SearchParameters {
 
 }
 
- function setProperty(books) {
-    books.forEach(book => {
+ function setProperty(library) {
+
+    library.works.forEach(book => {
         book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
         book.authorsList = [];
         book.authors.forEach(author => book.authorsList.push(author.name));
     });
-    return books
+    console.log(library)
+    return library
 
 }
 
- function createCards(books) {
-
-    books.forEach(book => {
+ function createCards(library) {
+    library.works.forEach(book => {
         let card = document.createElement('div');
         card.classList.add('card');
         card.style.width = '15rem';
@@ -65,15 +66,17 @@ class SearchParameters {
 
 }
 
-
-
-document.addEventListener('keydown', (e) => {
+searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        let research = new SearchParameters(urlSite, searchSelectType.value, 'fantasy');
+        e.preventDefault();
+        cardsPlace.innerHTML = '';
+        let research = new SearchParameters(urlSite, searchSelectType.value, searchInput.value);
         research.get()
-        .then(books => setProperty(books.works))
-        .then(books => {
-            createCards(books); filterReport.innerHTML = `trovati ${books.length} libri`; 
+        .then(library => setProperty(library))
+        .then(library => {
+            createCards(library);
+            console.log(library)
+            filterReport.innerHTML = `trovati ${library.work_count} libri`; 
         })
 
         
