@@ -4,56 +4,77 @@ const cardsPlace = document.getElementById('cards-place');
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
 
+const urlTest = 'https://openlibrary.org/subjects/fantasy.json';
 
-
-class Seeker {
+class SearchParameters {
     constructor(urlSite, type, search) {
         this.urlSite = urlSite;
         this.type = type;
         this.search = search;
-        this.url = urlSite + '/' + type + '/' + search + ".json";
+        this.url = urlSite + type + search + ".json";
 
     }
-    async getLibrary() {
+    async get() {
         const response = await fetch(this.url);
-        const books = await response.json();
-        books.works.forEach(book => {
-            book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
-            book.authorsList = [];
-            book.authors.forEach(author => book.authorsList.push(author.name));
-        })
-        return books.works
+        const json = await response.json();
+        return json
+
     }
-    async createCards() {
-        let library = await this.getLibrary();
-        library.forEach(book => {
-            let card = makeCard(cardsPlace, book.title, book.authorsList, book.imgUrl);
-            card.addEventListener('click', () => console.log('test'))
-            
-        });
-     }
+
 }
 
-function makeCard(parent, title, authors, imgUrl) {
-    let card = document.createElement('div');
-    card.classList.add('card');
-    card.style.width = '15rem';
-    card.innerHTML =` 
-    <div class="card-body">
-    <h5 class="card-title">${title}</h5>
-    <p class="card-text">${authors}</p>
-    <img src="${imgUrl}" class="card-img-top" alt="cover">
-    </div>
-    `;
-    parent.appendChild(card);
-    return card
+async function setProperty(books) {
+    books = await books;
+    books = books.works;
+    books.forEach(book => {
+        book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
+        book.authorsList = [];
+        book.authors.forEach(author => book.authorsList.push(author.name));
+    });
+
 }
+
+async function createCards(books) {
+    books = await books;
+    books = books.works;
+    books.forEach(book => {
+        let card = document.createElement('div');
+        card.classList.add('card');
+        card.style.width = '15rem';
+        card.innerHTML = ` 
+        <div class="card-body">
+        <h5 class="card-title">${book.title}</h5>
+        <p class="card-text">${book.authorsList}</p>
+        <img src="${book.imgUrl}" class="card-img-top" alt="cover">
+        </div>
+        `;
+        cardsPlace.appendChild(card);
+        card.addEventListener('click', () => {
+            let searchBookProperty = new SearchParameters(urlSite, '', book.key);
+            let bookProprety = searchBookProperty.get();
+            let foo = async () => {
+                bookProprety = await bookProprety
+                
+                console.log(bookProprety.description)
+            }
+            foo()
+
+        })
+
+    });
+
+}
+
 
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        let research = new Seeker(urlSite, searchSelectType.value, 'fantasy');
-        research.createCards();
+        let research = new SearchParameters(urlSite, searchSelectType.value, 'fantasy');
+        let books = research.get();
+        setProperty(books);
+        createCards(books)
+    
+
 
     }
 })
