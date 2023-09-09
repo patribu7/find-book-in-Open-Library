@@ -4,11 +4,8 @@ const searchSelectType = document.getElementById('search-type');
 const cardsPlace = document.getElementById('cards-place');
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
-let numBookFind = 0;
 
-filterReport.innerHTML = `trovati ${numBookFind} libri`; 
-
-const urlTest = 'https://openlibrary.org/subjects/fantasy.json';
+filterReport.innerHTML = `trovati 0 libri`; 
 
 class SearchParameters {
     constructor(urlSite, type, search) {
@@ -76,7 +73,7 @@ document.addEventListener('keydown', (e) => {
         research.get()
         .then(books => setProperty(books.works))
         .then(books => {
-            createCards(books); console.log(books.length)
+            createCards(books); filterReport.innerHTML = `trovati ${books.length} libri`; 
         })
 
         
