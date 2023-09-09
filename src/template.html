@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8/">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+</head>
+
 <body>
 
   <div id="home" class="px-4 mx-4">
@@ -15,7 +24,7 @@
       </ul>
     </header>
   </div>
-  
+
   <form role="search" class="form-floating input-group p-4 sticky-top">
     <select id="search-type" style="max-width: 150px;" class="form-select" aria-label="Default select">
       <option value="subjects">Genere</option>
@@ -29,15 +38,15 @@
     <div class="nav-item border border-start-0"><a href="#home" class="link-dark nav-link ">^</a></div>
   </form>
 
-  <div class = "filter">posto per il filtro <br> trovati x libri</div>
+  <div class="filter">posto per il filtro <br> trovati x libri</div>
 
-  <div style="margin:10%; "class="d-flex justify-content-center">
-    <div id = "cards" class="d-flex flex-wrap w-75 gap-2">
+  <div style="margin:10%; " class="d-flex justify-content-center">
+    <div id="cards" class="d-flex flex-wrap w-75 gap-2">
 
 
     </div>
 
   </div>
-  </body>
-  
+</body>
+
 </html>

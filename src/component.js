@@ -55,8 +55,5 @@ document.addEventListener('keydown', (e) => {
         let research = new Seeker(urlSite, searchSelectType.value, 'fantasy');
         research.createCards()
 
-
-
-
     }
 })
