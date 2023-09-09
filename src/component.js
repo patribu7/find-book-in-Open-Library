@@ -1,6 +1,6 @@
 const searchInput = document.getElementById('search-input');
 const searchSelectType = document.getElementById('search-type');
-const cardsPlace = document.getElementById('cards');
+const cardsPlace = document.getElementById('cards-place');
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
 
@@ -27,9 +27,8 @@ class Seeker {
     async createCards() {
         let library = await this.getLibrary();
         library.forEach(book => {
-            makeCard(cardsPlace, book.title, book.authorsList, book.imgUrl)
-
-            console.log(book)
+            let card = makeCard(cardsPlace, book.title, book.authorsList, book.imgUrl);
+            card.addEventListener('click', () => console.log('test'))
             
         });
      }
@@ -46,14 +45,15 @@ function makeCard(parent, title, authors, imgUrl) {
     <img src="${imgUrl}" class="card-img-top" alt="cover">
     </div>
     `;
-    parent.appendChild(card)
+    parent.appendChild(card);
+    return card
 }
 
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         let research = new Seeker(urlSite, searchSelectType.value, 'fantasy');
-        research.createCards()
+        research.createCards();
 
     }
 })
