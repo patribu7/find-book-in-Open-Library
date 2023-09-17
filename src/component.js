@@ -1,5 +1,5 @@
 const filterReport = document.getElementById('filter-report');
-filterReport.innerHTML = `trovati 0 libri`; 
+filterReport.innerHTML = `trovati 0 libri`;
 const searchInput = document.getElementById('search-input');
 const searchSelectType = document.getElementById('search-type');
 const cardsPlace = document.getElementById('cards-place');
@@ -9,10 +9,14 @@ const imgSize = 'M';
 
 class SearchParameters {
     constructor(urlSite, type, search) {
-        this.urlSite = urlSite;
-        this.type = type;
-        this.search = search;
-        this.url = urlSite + type + search + ".json";
+
+        if (type.includes('json')) {
+            search = search.replace(' ', '+');
+        } else {
+            search = search + '.json';
+        }
+
+        this.url = urlSite + type + search;
 
     }
     async get() {
@@ -24,20 +28,33 @@ class SearchParameters {
 
 }
 
- function setProperty(library) {
-
-    library.works.forEach(book => {
-        book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
-        book.authorsList = [];
-        book.authors.forEach(author => book.authorsList.push(author.name));
-    });
+function setProperty(library) {
     console.log(library)
-    return library
 
+    if (searchSelectType.value === '/subjects/') {
+        library.works.count = library.work_count;
+        console.log(library.count)
+        library.works.forEach(book => {
+            book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
+            book.authorsList = [];
+            book.authors.forEach(author => book.authorsList.push(author.name)); // forse basta book.author.name
+            
+        });
+        return library.works
+
+    } else {
+        library.docs.count = library.numFound;
+        library.docs.forEach(book => {
+            book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_i + '-' + imgSize + '.jpg';
+            book.authorsList = book.author_name;
+        })
+        return library.docs
+
+    }
 }
 
- function createCards(library) {
-    library.works.forEach(book => {
+function createCards(library) {
+    library.forEach(book => {
         let card = document.createElement('div');
         card.classList.add('card');
         card.style.width = '15rem';
@@ -54,16 +71,13 @@ class SearchParameters {
             let bookProprety = searchBookProperty.get();
             let printDescription = async () => {
                 bookProprety = await bookProprety
-                
+
                 console.log(bookProprety.description)
             }
             printDescription()
-
         })
-
     });
-
-
+    filterReport.innerHTML = `trovati ${library.count} libri`;
 }
 
 searchInput.addEventListener('keydown', (e) => {
@@ -72,15 +86,10 @@ searchInput.addEventListener('keydown', (e) => {
         cardsPlace.innerHTML = '';
         let research = new SearchParameters(urlSite, searchSelectType.value, searchInput.value);
         research.get()
-        .then(library => setProperty(library))
-        .then(library => {
-            createCards(library);
-            console.log(library)
-            filterReport.innerHTML = `trovati ${library.work_count} libri`; 
-        })
+            .then(library => setProperty(library))
+            .then(library => {
+                createCards(library);
 
-        
-
-
+            })
     }
 })
