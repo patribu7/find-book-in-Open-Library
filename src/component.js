@@ -8,18 +8,21 @@ const imgSize = 'M';
 
 
 class SearchParameters {
-    constructor(urlSite, type, search) {
+    constructor(type, search) {
 
         if (type.includes('json')) {
-            search = search.replace(' ', '+');
+            this.search = search.replace(' ', '+');
         } else {
-            search = search + '.json';
+            this.search = search + '.json';
         }
+        this.type = type;
 
-        this.url = urlSite + type + search;
+        this.limit = 4;
+        this.offset = 0;
 
     }
     async get() {
+        this.url = urlSite + this.type + this.search + '?limit=' + this.limit + '&offset=' + this.offset;
         const response = await fetch(this.url);
         const json = await response.json();
         return json
@@ -29,16 +32,13 @@ class SearchParameters {
 }
 
 function setProperty(library) {
-    console.log(library)
-
     if (searchSelectType.value === '/subjects/') {
         library.works.count = library.work_count;
-        console.log(library.count)
         library.works.forEach(book => {
             book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
             book.authorsList = [];
             book.authors.forEach(author => book.authorsList.push(author.name)); // forse basta book.author.name
-            
+
         });
         return library.works
 
@@ -49,12 +49,29 @@ function setProperty(library) {
             book.authorsList = book.author_name;
         })
         return library.docs
+    }
+}
 
+class btnScroll {
+
+    constructor(books) {
+        let btn = document.createElement('button');
+        btn.innerHTML = 'show more';
+        cardsPlace.lastChild.appendChild(btn);
+        btn.addEventListener('click', () => this.showOthers(books));
+    }
+
+    showOthers(books) {
+        books.offset = books.offset + books.limit;
+        books.get()
+            .then(library => setProperty(library))
+            .then(library => createCards(library))
     }
 }
 
 function createCards(library) {
     library.forEach(book => {
+        let scrollPlace = document.createElement('div');
         let card = document.createElement('div');
         card.classList.add('card');
         card.style.width = '15rem';
@@ -66,8 +83,9 @@ function createCards(library) {
         </div>
         `;
         cardsPlace.appendChild(card);
+        cardsPlace.appendChild(scrollPlace);
         card.addEventListener('click', () => {
-            let searchBookProperty = new SearchParameters(urlSite, '', book.key);
+            let searchBookProperty = new SearchParameters('', book.key);
             let bookProprety = searchBookProperty.get();
             let printDescription = async () => {
                 bookProprety = await bookProprety
@@ -77,18 +95,20 @@ function createCards(library) {
             printDescription()
         })
     });
-    filterReport.innerHTML = `trovati ${library.count} libri`;
+
 }
 
 searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         cardsPlace.innerHTML = '';
-        let research = new SearchParameters(urlSite, searchSelectType.value, searchInput.value);
+        let research = new SearchParameters(searchSelectType.value, searchInput.value);
         research.get()
             .then(library => setProperty(library))
             .then(library => {
                 createCards(library);
+                filterReport.innerHTML = `trovati ${library.count} libri`;
+                new btnScroll(research);
 
             })
     }
