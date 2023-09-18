@@ -53,19 +53,22 @@ function setProperty(library) {
 }
 
 class btnScroll {
-
     constructor(books) {
-        let btn = document.createElement('button');
-        btn.innerHTML = 'show more';
-        cardsPlace.lastChild.appendChild(btn);
-        btn.addEventListener('click', () => this.showOthers(books));
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = 'show more';
+        cardsPlace.lastChild.appendChild(this.btn);
+        this.btn.addEventListener('click', () => this.showOthers(books));
     }
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
+        this.btn.remove()
         books.get()
             .then(library => setProperty(library))
-            .then(library => createCards(library))
+            .then(library => {
+                createCards(library);
+                new btnScroll(books)
+            })
     }
 }
 
