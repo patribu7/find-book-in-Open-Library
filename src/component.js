@@ -3,6 +3,7 @@ filterReport.innerHTML = `trovati 0 libri`;
 const searchInput = document.getElementById('search-input');
 const searchSelectType = document.getElementById('search-type');
 const cardsPlace = document.getElementById('cards-place');
+// const cardsContainer = document.getElementById('cards-container');
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
 
@@ -56,7 +57,8 @@ class btnScroll {
     constructor(books) {
         this.btn = document.createElement('button');
         this.btn.innerHTML = 'show more';
-        cardsPlace.lastChild.appendChild(this.btn);
+        this.btn.style.width = '100%';
+        $(this.btn).insertAfter(cardsPlace)
         this.btn.addEventListener('click', () => this.showOthers(books));
     }
 
@@ -73,8 +75,8 @@ class btnScroll {
 }
 
 function createCards(library) {
+
     library.forEach(book => {
-        let scrollPlace = document.createElement('div');
         let card = document.createElement('div');
         card.classList.add('card');
         card.style.width = '15rem';
@@ -86,13 +88,12 @@ function createCards(library) {
         </div>
         `;
         cardsPlace.appendChild(card);
-        cardsPlace.appendChild(scrollPlace);
         card.addEventListener('click', () => {
             let searchBookProperty = new SearchParameters('', book.key);
             let bookProprety = searchBookProperty.get();
             let printDescription = async () => {
                 bookProprety = await bookProprety
-
+                
                 console.log(bookProprety.description)
             }
             printDescription()
