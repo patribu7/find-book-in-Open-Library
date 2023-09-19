@@ -27,9 +27,7 @@ class SearchParameters {
         const response = await fetch(this.url);
         const json = await response.json();
         return json
-
     }
-
 }
 
 function setProperty(library) {
@@ -75,7 +73,6 @@ class btnScroll {
 }
 
 function createCards(library) {
-
     library.forEach(book => {
         let card = document.createElement('div');
         card.classList.add('card');
@@ -103,6 +100,34 @@ function createCards(library) {
             printDescription()
         })
     });
+
+}
+
+class Placeholder {
+    constructor() {
+        this.card = document.createElement('div');
+        this.card.classList.add('card');
+        this.card.style.width = '15rem';
+        this.card.innerHTML = ` 
+        <div class="card-body">
+          <h5 class="card-title placeholder-glow"><span class="placeholder col-6"></span></h5>
+          <p class="card-text placeholder-glow">
+            <span class="placeholder col-4"></span>
+            <span class="placeholder col-7"></span>
+            <span class="placeholder col-6"></span>
+            <span class="placeholder col-3"></span>
+          </p>
+          <div class="placeholder-wave card-img-bottom" style="width: 100%; height: 230px; background-color: gray;" alt="..."></div>
+        </div>
+        `;
+    }
+
+    create() {
+        cardsPlace.appendChild(this.card);
+    }
+    remove() {
+        this.card.remove()
+    }
 
 }
 
