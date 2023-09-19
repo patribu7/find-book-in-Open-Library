@@ -3,7 +3,7 @@ filterReport.innerHTML = `trovati 0 libri`;
 const searchInput = document.getElementById('search-input');
 const searchSelectType = document.getElementById('search-type');
 const cardsPlace = document.getElementById('cards-place');
-// const cardsContainer = document.getElementById('cards-container');
+
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
 
@@ -80,6 +80,9 @@ function createCards(library) {
         let card = document.createElement('div');
         card.classList.add('card');
         card.style.width = '15rem';
+        card.setAttribute('data-bs-toggle', 'popover');
+        card.setAttribute('data-bs-content', 'test');
+
         card.innerHTML = ` 
         <div class="card-body">
         <h5 class="card-title">${book.title}</h5>
@@ -91,6 +94,7 @@ function createCards(library) {
         card.addEventListener('click', () => {
             let searchBookProperty = new SearchParameters('', book.key);
             let bookProprety = searchBookProperty.get();
+
             let printDescription = async () => {
                 bookProprety = await bookProprety
                 
