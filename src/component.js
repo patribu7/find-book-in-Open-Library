@@ -62,45 +62,64 @@ class btnScroll {
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
+        let cards = new Cards();
         this.btn.remove()
         books.get()
             .then(library => setProperty(library))
             .then(library => {
-                createCards(library);
+                cards.create(library);
+                cards.show();
                 new btnScroll(books)
             })
     }
 }
 
-function createCards(library) {
-    library.forEach(book => {
-        let card = document.createElement('div');
-        card.classList.add('card');
-        card.style.width = '15rem';
-        card.setAttribute('data-bs-toggle', 'popover');
-        card.setAttribute('data-bs-content', 'test');
+class Cards {
+    constructor() {
 
-        card.innerHTML = ` 
-        <div class="card-body">
-        <h5 class="card-title">${book.title}</h5>
-        <p class="card-text">${book.authorsList}</p>
-        <img src="${book.imgUrl}" class="card-img-top" alt="cover">
-        </div>
-        `;
-        cardsPlace.appendChild(card);
-        card.addEventListener('click', () => {
-            let searchBookProperty = new SearchParameters('', book.key);
-            let bookProprety = searchBookProperty.get();
+    }
+    create(library) {
+        this.library = library;
+        this.library.forEach(book => {
+            let card = document.createElement('div');
+            card.classList.add('card');
+            card.style.width = '15rem';
+            card.setAttribute('data-bs-toggle', 'popover');
+            card.setAttribute('data-bs-content', 'test');
+            card.style.display = 'none';
 
-            let printDescription = async () => {
-                bookProprety = await bookProprety
-                
-                console.log(bookProprety.description)
-            }
-            printDescription()
-        })
-    });
+            card.innerHTML = ` 
+            <div class="card-body">
+            <h5 class="card-title">${book.title}</h5>
+            <p class="card-text">${book.authorsList}</p>
+            <img src="${book.imgUrl}" class="card-img-top" alt="cover">
+            </div>
+            `;
+            cardsPlace.appendChild(card);
+            card.addEventListener('click', () => {
+                let searchBookProperty = new SearchParameters('', book.key);
+                let bookProprety = searchBookProperty.get();
 
+                let printDescription = async () => {
+                    bookProprety = await bookProprety
+
+                    console.log(bookProprety.description)
+                }
+                printDescription()
+            })
+        });
+
+    }
+
+    // correggere sopra display none e quanto segue:
+    hide() {
+        document.getElementsByClassName('card')
+            .forEach(card => { card.style.display = 'none'; })
+    }
+    show() {
+        $(".card").css("display", "");
+
+    }
 }
 
 class Placeholder {
@@ -134,15 +153,28 @@ class Placeholder {
 searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
+        let placeholder = new Placeholder();
+        let cards = new Cards();
         cardsPlace.innerHTML = '';
         let research = new SearchParameters(searchSelectType.value, searchInput.value);
         research.get()
             .then(library => setProperty(library))
             .then(library => {
-                createCards(library);
+                placeholder.create();
                 filterReport.innerHTML = `trovati ${library.count} libri`;
-                new btnScroll(research);
+                cards.create(library);
+                })
+            // .then (
+            //     () => document.getElementsByTagName('img').onload
+            //     )
+            .then(() => {
 
-            })
+                    cards.show();
+                    placeholder.remove();
+                    new btnScroll(research);
+                
+                })
+                
+            // });
     }
 })
