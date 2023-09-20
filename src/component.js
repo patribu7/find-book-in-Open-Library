@@ -56,11 +56,13 @@ class btnScroll {
         this.btn = document.createElement('button');
         this.btn.innerHTML = 'show more';
         this.btn.style.width = '100%';
+        this.btn.id = 'btn-scroll';
         $(this.btn).insertAfter(cardsPlace)
         this.btn.addEventListener('click', () => this.showOthers(books));
     }
 
     showOthers(books) {
+        console.log(books.offset);
         books.offset = books.offset + books.limit;
         let cards = new Cards();
         this.btn.remove()
@@ -96,6 +98,8 @@ class Cards {
             </div>
             `;
             cardsPlace.appendChild(card);
+
+            
             card.addEventListener('click', () => {
                 let searchBookProperty = new SearchParameters('', book.key);
                 let bookProprety = searchBookProperty.get();
@@ -153,9 +157,10 @@ class Placeholder {
 searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
+        cardsPlace.innerHTML = '';
+
         let placeholder = new Placeholder();
         let cards = new Cards();
-        cardsPlace.innerHTML = '';
         let research = new SearchParameters(searchSelectType.value, searchInput.value);
         research.get()
             .then(library => setProperty(library))
@@ -163,18 +168,16 @@ searchInput.addEventListener('keydown', (e) => {
                 placeholder.create();
                 filterReport.innerHTML = `trovati ${library.count} libri`;
                 cards.create(library);
-                })
-            // .then (
-            //     () => document.getElementsByTagName('img').onload
-            //     )
+            })
             .then(() => {
-
-                    cards.show();
-                    placeholder.remove();
-                    new btnScroll(research);
-                
-                })
-                
-            // });
+                cards.show();
+                placeholder.remove();
+                if (document.getElementById('btn-scroll')){
+                document.getElementById('btn-scroll').remove()
+                new btnScroll(research);
+                } else {    
+                new btnScroll(research);    
+                }
+            })
     }
 })
