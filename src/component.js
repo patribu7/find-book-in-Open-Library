@@ -1,3 +1,5 @@
+import ndCover from "./image-component"
+
 const filterReport = document.getElementById('filter-report');
 filterReport.innerHTML = `trovati 0 libri`;
 const searchInput = document.getElementById('search-input');
@@ -26,6 +28,7 @@ class SearchParameters {
         this.url = urlSite + this.type + this.search + '?limit=' + this.limit + '&offset=' + this.offset;
         const response = await fetch(this.url);
         const json = await response.json();
+        console.log(json)
         return json
     }
 }
@@ -34,7 +37,13 @@ function setProperty(library) {
     if (searchSelectType.value === '/subjects/') {
         library.works.count = library.work_count;
         library.works.forEach(book => {
-            book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
+            if(book.cover_id != null){
+                book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
+            } else {
+                console.log(ndCover)
+               book.imgUrl = ndCover.src;
+            };
+            
             book.authorsList = [];
             book.authors.forEach(author => book.authorsList.push(author.name)); // forse basta book.author.name
 

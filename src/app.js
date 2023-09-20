@@ -1,8 +1,6 @@
-import './component';
-
-import './style.css';
-
 import './image-component';
+import './component';
+import './style.css';
 
 // Import our custom CSS
 import './scss/styles.scss';
