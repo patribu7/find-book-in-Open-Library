@@ -1,19 +1,6 @@
 import ndCover from "./image-component"
 import * as bootstrap from 'bootstrap';
 
-class foo {
-    constructor() {
-        this.x = 'sono un foo'
-    }
-    y() {
-        this.x = 'sono un goo, una cosa diversa'
-    }
-}
-
-
-
-
-
 
 const filterReport = document.getElementById('filter-report');
 filterReport.innerHTML = `trovati 0 libri`;
@@ -110,9 +97,6 @@ class Cards {
             card.classList.add('card');
             card.style.width = '15rem';
 
-
-            card.style.display = 'none';
-
             card.innerHTML = ` 
             <div class="card-body">
             <h5 class="card-title">${book.title}</h5>
@@ -130,34 +114,22 @@ class Cards {
                 let printDescription = async () => {
                     bookProprety = await bookProprety;
 
-
                     [card].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
                     $(card).attr('data-bs-toggle', 'popover');
                     $(card).attr('data-bs-trigger', 'hover focus');
                     $(card).attr('data-bs-content', bookProprety.description.value);
-
-
-
-                    console.log(bookProprety.description)
                 }
                 printDescription()
-
-
-
             })
-
         })
-
-
     }
 
     // correggere sopra display none e quanto segue:
     hide() {
-        document.getElementsByClassName('card')
-            .forEach(card => { card.style.display = 'none'; })
+        $('.card').hide;
     }
     show() {
-        $(".card").css("display", "");
+        $('.card').show;
 
     }
 }
@@ -181,8 +153,8 @@ class Placeholder {
         `;
     }
 
-    create() {
-        cardsPlace.appendChild(this.card);
+    async create() {
+        await cardsPlace.appendChild(this.card);
     }
     remove() {
         this.card.remove()
@@ -198,21 +170,17 @@ searchInput.addEventListener('keydown', (e) => {
         let placeholder = new Placeholder();
         let cards = new Cards();
         let research = new SearchParameters(searchSelectType.value, searchInput.value);
-        research.get()
-            .then(library => {
-                placeholder.create();
-                return library;
-            })
+
+        placeholder.create()
+            .then(() => research.get())
             .then(library => setProperty(library))
             .then(library => {
-
                 filterReport.innerHTML = `trovati ${library.count} libri`;
                 cards.create(library);
-
+                cards.hide()
             })
             .then(() => {
                 cards.show();
-
 
                 if (document.getElementById('btn-scroll')) {
                     document.getElementById('btn-scroll').remove()
