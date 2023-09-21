@@ -1,4 +1,19 @@
 import ndCover from "./image-component"
+import * as bootstrap from 'bootstrap';
+
+class foo {
+    constructor() {
+        this.x = 'sono un foo'
+    }
+    y() {
+        this.x = 'sono un goo, una cosa diversa'
+    }
+}
+
+
+
+
+
 
 const filterReport = document.getElementById('filter-report');
 filterReport.innerHTML = `trovati 0 libri`;
@@ -28,7 +43,7 @@ class SearchParameters {
         this.url = urlSite + this.type + this.search + '?limit=' + this.limit + '&offset=' + this.offset;
         const response = await fetch(this.url);
         const json = await response.json();
-        console.log(json)
+
         return json
     }
 }
@@ -37,15 +52,15 @@ function setProperty(library) {
     if (searchSelectType.value === '/subjects/') {
         library.works.count = library.work_count;
         library.works.forEach(book => {
-            if(book.cover_id != null){
+            if (book.cover_id != null) {
                 book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
             } else {
-                console.log(ndCover)
-               book.imgUrl = ndCover.src;
+                book.imgUrl = ndCover.src;
             };
-            
+
             book.authorsList = [];
             book.authors.forEach(author => book.authorsList.push(author.name)); // forse basta book.author.name
+
 
         });
         return library.works
@@ -94,8 +109,8 @@ class Cards {
             let card = document.createElement('div');
             card.classList.add('card');
             card.style.width = '15rem';
-            card.setAttribute('data-bs-toggle', 'popover');
-            card.setAttribute('data-bs-content', 'test');
+
+
             card.style.display = 'none';
 
             card.innerHTML = ` 
@@ -107,19 +122,32 @@ class Cards {
             `;
             cardsPlace.appendChild(card);
 
-            
+
+
             card.addEventListener('click', () => {
                 let searchBookProperty = new SearchParameters('', book.key);
                 let bookProprety = searchBookProperty.get();
-
                 let printDescription = async () => {
-                    bookProprety = await bookProprety
+                    bookProprety = await bookProprety;
+
+
+                    [card].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+                    $(card).attr('data-bs-toggle', 'popover');
+                    $(card).attr('data-bs-trigger', 'hover focus');
+                    $(card).attr('data-bs-content', bookProprety.description.value);
+
+
 
                     console.log(bookProprety.description)
                 }
                 printDescription()
+
+
+
             })
-        });
+
+        })
+
 
     }
 
@@ -171,21 +199,29 @@ searchInput.addEventListener('keydown', (e) => {
         let cards = new Cards();
         let research = new SearchParameters(searchSelectType.value, searchInput.value);
         research.get()
-            .then(library => setProperty(library))
             .then(library => {
                 placeholder.create();
+                return library;
+            })
+            .then(library => setProperty(library))
+            .then(library => {
+
                 filterReport.innerHTML = `trovati ${library.count} libri`;
                 cards.create(library);
+
             })
             .then(() => {
                 cards.show();
-                placeholder.remove();
-                if (document.getElementById('btn-scroll')){
-                document.getElementById('btn-scroll').remove()
-                new btnScroll(research);
-                } else {    
-                new btnScroll(research);    
+
+
+                if (document.getElementById('btn-scroll')) {
+                    document.getElementById('btn-scroll').remove()
+
+                    new btnScroll(research);
+                } else {
+                    new btnScroll(research);
                 }
             })
+            .then(() => placeholder.remove())
     }
 })
