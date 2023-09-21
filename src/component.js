@@ -1,3 +1,4 @@
+
 import ndCover from "./image-component"
 import * as bootstrap from 'bootstrap';
 
@@ -10,6 +11,8 @@ const cardsPlace = document.getElementById('cards-place');
 
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
+
+
 
 
 class SearchParameters {
@@ -74,15 +77,29 @@ class btnScroll {
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
-        let cards = new Cards();
-        this.btn.remove()
-        books.get()
+        
+        let placeholder = new Placeholder();
+        placeholder.create()
+            .then(() => books.get()
+                
+            )
             .then(library => setProperty(library))
             .then(library => {
-                cards.create(library);
-                cards.show();
-                new btnScroll(books)
+                library.forEach(book => {
+                    let card = new Card(book);
+                    card.create();
+                })
             })
+            .then(library => {
+                placeholder.remove();
+                return library
+                
+            })
+            .then(library => {
+                this.btn.remove()
+                return library
+            })
+            .then(library => new btnScroll(library))
     }
 }
 
@@ -115,9 +132,9 @@ class Card {
         })
     }
     create() {
-            cardsPlace.appendChild(this.card);
-        }
-    
+        cardsPlace.appendChild(this.card);
+    }
+
 }
 
 class Placeholder {
@@ -168,16 +185,9 @@ searchInput.addEventListener('keydown', (e) => {
 
             })
             .then(() => {
+                placeholder.remove();
+                new btnScroll(research);
 
-
-                if (document.getElementById('btn-scroll')) {
-                    document.getElementById('btn-scroll').remove()
-
-                    new btnScroll(research);
-                } else {
-                    new btnScroll(research);
-                }
             })
-            .then(() => placeholder.remove())
     }
 })
