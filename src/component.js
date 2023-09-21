@@ -86,52 +86,38 @@ class btnScroll {
     }
 }
 
-class Cards {
-    constructor() {
+class Card {
+    constructor(book) {
+        this.card = document.createElement('div');
+        this.card.classList.add('card');
+        this.card.style.width = '15rem';
 
-    }
-    create(library) {
-        this.library = library;
-        this.library.forEach(book => {
-            let card = document.createElement('div');
-            card.classList.add('card');
-            card.style.width = '15rem';
-
-            card.innerHTML = ` 
+        this.card.innerHTML = ` 
             <div class="card-body">
             <h5 class="card-title">${book.title}</h5>
             <p class="card-text overflow-auto" style="max-height: 80px" >${(book.authorsList).join(', ')}</p>
             <img src="${book.imgUrl}" class="card-img-top" alt="cover">
             </div>
             `;
-            cardsPlace.appendChild(card);
+        this.card.addEventListener('click', () => {
+            let searchBookProperty = new SearchParameters('', book.key);
+            let bookProprety = searchBookProperty.get();
+            let printDescription = async () => {
+                bookProprety = await bookProprety;
 
+                [this.card].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+                $(this.card).attr('data-bs-toggle', 'popover');
+                $(this.card).attr('data-bs-trigger', 'hover focus');
+                $(this.card).attr('data-bs-content', bookProprety.description.value);
+            }
+            printDescription()
 
-
-            card.addEventListener('click', () => {
-                let searchBookProperty = new SearchParameters('', book.key);
-                let bookProprety = searchBookProperty.get();
-                let printDescription = async () => {
-                    bookProprety = await bookProprety;
-
-                    [card].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
-                    $(card).attr('data-bs-toggle', 'popover');
-                    $(card).attr('data-bs-trigger', 'hover focus');
-                    $(card).attr('data-bs-content', bookProprety.description.value);
-                }
-                printDescription()
-            })
         })
     }
-
-    // correggere sopra display none e quanto segue:
-    hide() {
-        $('.card').hide;
-    }
-    show() {
-        $('.card').show;
-
-    }
+    create() {
+            cardsPlace.appendChild(this.card);
+        }
+    
 }
 
 class Placeholder {
@@ -168,7 +154,6 @@ searchInput.addEventListener('keydown', (e) => {
         cardsPlace.innerHTML = '';
 
         let placeholder = new Placeholder();
-        let cards = new Cards();
         let research = new SearchParameters(searchSelectType.value, searchInput.value);
 
         placeholder.create()
@@ -176,11 +161,14 @@ searchInput.addEventListener('keydown', (e) => {
             .then(library => setProperty(library))
             .then(library => {
                 filterReport.innerHTML = `trovati ${library.count} libri`;
-                cards.create(library);
-                cards.hide()
+                library.forEach(book => {
+                    let card = new Card(book);
+                    card.create();
+                })
+
             })
             .then(() => {
-                cards.show();
+
 
                 if (document.getElementById('btn-scroll')) {
                     document.getElementById('btn-scroll').remove()
