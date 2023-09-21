@@ -100,7 +100,7 @@ class Cards {
             card.innerHTML = ` 
             <div class="card-body">
             <h5 class="card-title">${book.title}</h5>
-            <p class="card-text overflow-auto" style="max-height: 80px" >${book.authorsList}</p>
+            <p class="card-text overflow-auto" style="max-height: 80px" >${(book.authorsList).join(', ')}</p>
             <img src="${book.imgUrl}" class="card-img-top" alt="cover">
             </div>
             `;
