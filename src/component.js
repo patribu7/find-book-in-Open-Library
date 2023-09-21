@@ -116,10 +116,10 @@ class Card {
         this.card.addEventListener('click', () => {
             let searchBookProperty = new SearchParameters('', book.key);
             let bookProprety = searchBookProperty.get();
+            let popup = new PopupIn(this.card);
             let printDescription = async () => {
                 bookProprety = await bookProprety;
-                let popup = new PopupDescr(bookProprety.description);
-                popup.createIn(this.card)
+                popup.addText(bookProprety.description)
 
             }
             printDescription()
@@ -132,28 +132,30 @@ class Card {
 
 }
 
-class PopupDescr {
-    constructor(textDescription) {
-        if (typeof textDescription === Object) {
-            this.description = textDescription.value
+class PopupIn {
+    constructor(card) {
+        this.descr = document.createElement('div');
+        this.descr.classList.add('position-absolute', 'top-0', 'start-0', 'overflow-auto');
+        this.descr.style.width = '100%';
+        this.descr.style.height = '100%';
+        this.descr.style.background = 'rgba(251, 248, 237, 0.85)';
+
+
+        card.appendChild(this.descr)
+    }
+
+    addText(description) {
+        if (typeof description === 'object') {
+            this.description = description.value
         } else {
-            this.description = textDescription
+            this.description = description
         }
-    }
-
-    createIn(card) {
-        let descr = document.createElement('div');
-        descr.classList.add('position-absolute', 'top-0', 'start-0');
-        descr.style.width = '100%';
-        descr.style.height = '100%';
-        descr.style.background = 'rgba(251, 248, 237, 0.85)';
-        
-        card.appendChild(descr)
+        this.descr.innerHTML = this.description
 
     }
 
-    appear(){}
-    disapper() {}
+    appear() { }
+    disapper() { }
 }
 
 class Placeholder {
