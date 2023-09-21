@@ -77,12 +77,12 @@ class btnScroll {
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
-     
-        
+
+
         let placeholder = new Placeholder();
         placeholder.create()
             .then(() => books.get()
-                
+
             )
             .then(library => setProperty(library))
             .then(library => {
@@ -93,12 +93,12 @@ class btnScroll {
             })
             .then(library => {
                 placeholder.remove();
-                
-                
-                
+
+
+
             })
 
-          
+
     }
 }
 
@@ -185,7 +185,13 @@ searchInput.addEventListener('keydown', (e) => {
             })
             .then(() => {
                 placeholder.remove();
-                new btnScroll(research);
+
+                if (document.getElementById('btn-scroll') != null) {
+                    $('#btn-scroll').remove()
+                    new btnScroll(research)
+                } else {
+                    new btnScroll(research)
+                };
 
             })
     }
