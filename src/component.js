@@ -1,6 +1,4 @@
-
 import ndCover from "./image-component"
-import * as bootstrap from 'bootstrap';
 
 
 const filterReport = document.getElementById('filter-report');
@@ -120,11 +118,9 @@ class Card {
             let bookProprety = searchBookProperty.get();
             let printDescription = async () => {
                 bookProprety = await bookProprety;
+                let popup = new PopupDescr(bookProprety.description);
+                popup.createIn(this.card)
 
-                [this.card].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
-                $(this.card).attr('data-bs-toggle', 'popover');
-                $(this.card).attr('data-bs-trigger', 'hover focus');
-                $(this.card).attr('data-bs-content', bookProprety.description.value);
             }
             printDescription()
 
@@ -134,6 +130,30 @@ class Card {
         cardsPlace.appendChild(this.card);
     }
 
+}
+
+class PopupDescr {
+    constructor(textDescription) {
+        if (typeof textDescription === Object) {
+            this.description = textDescription.value
+        } else {
+            this.description = textDescription
+        }
+    }
+
+    createIn(card) {
+        let descr = document.createElement('div');
+        descr.classList.add('position-absolute', 'top-0', 'start-0');
+        descr.style.width = '100%';
+        descr.style.height = '100%';
+        descr.style.background = 'rgba(251, 248, 237, 0.85)';
+        
+        card.appendChild(descr)
+
+    }
+
+    appear(){}
+    disapper() {}
 }
 
 class Placeholder {
