@@ -134,24 +134,29 @@ class Card {
 
 class PopupIn {
     constructor(card) {
-        this.descr = document.createElement('div');
-        this.descr.classList.add('position-absolute', 'top-0', 'start-0', 'overflow-auto');
-        this.descr.style.width = '100%';
-        this.descr.style.height = '100%';
-        this.descr.style.background = 'rgba(251, 248, 237, 0.85)';
+        this.descrDOM = document.createElement('div');
+        this.descrDOM.classList.add('position-absolute', 'top-0', 'start-0', 'overflow-auto');
+        this.descrDOM.style.width = '100%';
+        this.descrDOM.style.height = '100%';
+        this.descrDOM.style.background = 'rgba(251, 248, 237, 0.85)';
 
 
-        card.appendChild(this.descr)
+        card.appendChild(this.descrDOM)
     }
 
     addText(description) {
-        if (typeof description === 'object') {
-            this.description = description.value
-        } else {
-            this.description = description
+        switch (typeof description) {
+            case 'undefined':
+                this.description = 'description not available 🙄';
+                break;
+            case 'object':
+                this.description = description.value;
+                break;
+            case 'string':
+                this.description = description;
+                break
         }
-        this.descr.innerHTML = this.description
-
+        this.descrDOM.innerHTML = this.description
     }
 
     appear() { }
