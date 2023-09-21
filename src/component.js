@@ -77,6 +77,7 @@ class btnScroll {
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
+     
         
         let placeholder = new Placeholder();
         placeholder.create()
@@ -92,14 +93,12 @@ class btnScroll {
             })
             .then(library => {
                 placeholder.remove();
-                return library
+                
+                
                 
             })
-            .then(library => {
-                this.btn.remove()
-                return library
-            })
-            .then(library => new btnScroll(library))
+
+          
     }
 }
 
