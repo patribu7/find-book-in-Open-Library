@@ -130,7 +130,7 @@ class Card {
         let printDescription = async () => {
             bookProprety = await bookProprety;
             popup.addText(bookProprety.description)
-            
+
         }
         printDescription();
         this.card.addEventListener('click', popup.switchShow);
@@ -171,7 +171,7 @@ class PopupIn {
     }
 
     switchShow() {
-       
+
         if ($(this.descrDOM).is(':visible')) {
             $(this.descrDOM).hide
         } else if ($(this.descrDOM).is(':hidden')) {
@@ -222,21 +222,21 @@ searchInput.addEventListener('keydown', (e) => {
             .then(library => setProperty(library))
             .then(library => {
                 filterReport.innerHTML = `trovati ${library.count} libri`;
-                library.forEach(book => {
-                    let card = new Card(book);
-                    card.create();
-                })
-
-            })
-            .then(() => {
-                placeholder.remove();
-
-                if (document.getElementById('btn-scroll') != null) {
-                    $('#btn-scroll').remove()
-                    new btnScroll(research)
+                if (!library.count) {
+                    document.getElementById('filter').innerHTML = `The search has no results. Try searching for a valid subject in the page <a href = 'https://openlibrary.org/subjects' target ='_blank'> Open Library </a>`;                    $('#btn-scroll').remove()
                 } else {
-                    new btnScroll(research)
-                };
+                    if (document.getElementById('btn-scroll') != null) {
+                        $('#btn-scroll').remove()
+                        new btnScroll(research)
+                    } else {
+                        new btnScroll(research)
+                    };
+                    library.forEach(book => {
+                        let card = new Card(book);
+                        card.create();
+                    })
+                }
+                placeholder.remove();
 
             })
     }
