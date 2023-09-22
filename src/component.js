@@ -102,6 +102,7 @@ class btnScroll {
 
 class Card {
     constructor(book) {
+        this.key = book.key;
         this.card = document.createElement('div');
         this.card.classList.add('card');
         this.card.style.width = '15rem';
@@ -113,21 +114,31 @@ class Card {
             <img src="${book.imgUrl}" class="card-img-top" alt="cover">
             </div>
             `;
-        this.card.addEventListener('click', () => {
-            let searchBookProperty = new SearchParameters('', book.key);
-            let bookProprety = searchBookProperty.get();
-            let popup = new PopupIn(this.card);
-            let printDescription = async () => {
-                bookProprety = await bookProprety;
-                popup.addText(bookProprety.description)
 
-            }
-            printDescription()
-
-        })
+        this.card.addEventListener('click', () => this.getDescription())
     }
+
     create() {
         cardsPlace.appendChild(this.card);
+    }
+    getDescription() {
+
+        let popup = new PopupIn(this.card);
+
+        let searchBookProperty = new SearchParameters('', this.key);
+        let bookProprety = searchBookProperty.get();
+        let printDescription = async () => {
+            bookProprety = await bookProprety;
+            popup.addText(bookProprety.description)
+            
+        }
+        printDescription();
+        this.card.addEventListener('click', popup.switchShow);
+
+        // this.card.removeEventListener('click', this.getDescription);
+
+
+
     }
 
 }
@@ -159,8 +170,15 @@ class PopupIn {
         this.descrDOM.innerHTML = this.description
     }
 
-    appear() { }
-    disapper() { }
+    switchShow() {
+       
+        if ($(this.descrDOM).is(':visible')) {
+            $(this.descrDOM).hide
+        } else if ($(this.descrDOM).is(':hidden')) {
+            $(this.descrDOM).show
+
+        }
+    }
 }
 
 class Placeholder {
