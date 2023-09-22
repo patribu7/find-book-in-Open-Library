@@ -9,7 +9,16 @@ const cardsPlace = document.getElementById('cards-place');
 
 const urlSite = 'https://openlibrary.org';
 const imgSize = 'M';
-
+const researchTypes = {
+    'subjects': '/subjects/',
+    'title': '/search.json?title=',
+    'authors': '/search/authors.json?q=',
+    'general': '/search.json?q=',
+    '/subjects/' : 'subjects',
+    '/search.json?title=': 'title',
+    '/search/authors.json?q=': 'authors',
+    '/search.json?q=': 'general'
+}
 
 
 
@@ -18,8 +27,10 @@ class SearchParameters {
 
         if (type.includes('json')) {
             this.search = search.replace(' ', '+');
+            this.separator = '&';
         } else {
             this.search = search.replace(' ', '_') + '.json';
+            this.separator = '?'
         }
         this.type = type;
 
@@ -27,8 +38,8 @@ class SearchParameters {
         this.offset = 0;
 
     }
-    async get() {
-        this.url = urlSite + this.type + this.search + '?limit=' + this.limit + '&offset=' + this.offset;
+    async get() { 
+        this.url = urlSite + this.type + this.search + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
         const response = await fetch(this.url);
         const json = await response.json();
     console.log(this.url)
@@ -38,7 +49,7 @@ class SearchParameters {
 }
 
 function setProperty(library) {
-    if (searchSelectType.value === '/subjects/') {
+    if (searchSelectType.value === researchTypes.subjects) {
         library.works.count = library.work_count;
         library.works.forEach(book => {
             if (book.cover_id != null) {
@@ -224,7 +235,9 @@ searchInput.addEventListener('keydown', (e) => {
             .then(library => {
                 filterReport.innerHTML = `trovati ${library.count} libri`;
                 if (!library.count) {
-                    document.getElementById('filter').innerHTML = `The search has no results. Try searching for a valid subject in the page <a href = 'https://openlibrary.org/subjects' target ='_blank'> Open Library </a>`;                    $('#btn-scroll').remove()
+                
+                    document.getElementById('filter').innerHTML = `
+                    The search has no results. Try searching for a valid ${researchTypes[searchSelectType.value]} in the page <a href = 'https://openlibrary.org${searchSelectType.value}' target ='_blank'> Open Library </a>`;                    $('#btn-scroll').remove()
                 } else {
                     if (document.getElementById('btn-scroll') != null) {
                         $('#btn-scroll').remove()
