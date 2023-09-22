@@ -19,7 +19,7 @@ class SearchParameters {
         if (type.includes('json')) {
             this.search = search.replace(' ', '+');
         } else {
-            this.search = search + '.json';
+            this.search = search.replace(' ', '_') + '.json';
         }
         this.type = type;
 
@@ -31,9 +31,10 @@ class SearchParameters {
         this.url = urlSite + this.type + this.search + '?limit=' + this.limit + '&offset=' + this.offset;
         const response = await fetch(this.url);
         const json = await response.json();
-
+    console.log(this.url)
         return json
     }
+
 }
 
 function setProperty(library) {
