@@ -3,10 +3,10 @@ import './image-component';
 import './component';
 
 
-import './style.css';
+import '../style.css';
 
 // Import our custom CSS
-import './scss/styles.scss';
+import '../scss/styles.scss';
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap';
 

@@ -7,12 +7,6 @@ filterReport.innerHTML = `trovati 0 libri`;
 const searchInput = document.getElementById('search-input');
 const cardsPlace = document.getElementById('cards-place');
 
-
-
-
-
-
-
 class SearchParameters {
     constructor(type, search) {
 
@@ -226,7 +220,7 @@ searchInput.addEventListener('keydown', (e) => {
                 if (!library.count) {
                 
                     document.getElementById('filter').innerHTML = `
-                    The search has no results. Try searching for a valid ${researchType[searchSelectType.value].type} in the page <a href = 'https://openlibrary.org${searchType[searchSelectType.value].urlToSite}' target ='_blank'> Open Library </a>`; // searchSelectType.value e' sbagliato. Usare meglio il dizionario.
+                    The search has no results. Try searching for a valid ${researchType[searchSelectType.value].type} in the page <a href = 'https://openlibrary.org${researchType[searchSelectType.value].urlToSite}' target ='_blank'> Open Library </a>`; // searchSelectType.value e' sbagliato. Usare meglio il dizionario.
                     $('#btn-scroll').remove()
                 } else {
                     if (document.getElementById('btn-scroll') != null) {
