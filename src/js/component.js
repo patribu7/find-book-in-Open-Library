@@ -1,11 +1,8 @@
 import ndCover from "./image-component"
 import researchType from './researchType';
 import { value_search, value_type } from "./getInputValue";
+import filterReport from "./filters";
 
-const searchSelectType = document.getElementById('search-type');
-const filterReport = document.getElementById('filter-report');
-filterReport.innerHTML = `trovati 0 libri`;
-const searchInput = document.getElementById('search-input');
 const cardsPlace = document.getElementById('cards-place');
 
 class SearchParameters {
@@ -211,17 +208,21 @@ window.addEventListener('keydown', (e) => {
         cardsPlace.innerHTML = '';
 
         let placeholder = new Placeholder();
-        let research = new SearchParameters(searchSelectType.value, searchInput.value);
+        let research = new SearchParameters(value_type(), value_search());
 
         placeholder.create()
             .then(() => research.get())
             .then(library => setProperty(library))
             .then(library => {
-                filterReport.innerHTML = `trovati ${library.count} libri`;
+                filterReport.fill(`trovati ${library.count} libri`);
                 if (!library.count) {
                 
                     document.getElementById('filter').innerHTML = `
-                    The search has no results. Try searching for a valid ${researchType[searchSelectType.value].type} in the page <a href = 'https://openlibrary.org${researchType[searchSelectType.value].urlToSite}' target ='_blank'> Open Library </a>`; // searchSelectType.value e' sbagliato. Usare meglio il dizionario.
+
+                    The search has no results. Try searching for a valid ${researchType[value_type()].type}
+                    in the page <a href = 'https://openlibrary.org${researchType[value_type()].urlToSite}'
+                    target ='_blank'> Open Library </a>`;
+
                     $('#btn-scroll').remove()
                 } else {
                     if (document.getElementById('btn-scroll') != null) {
