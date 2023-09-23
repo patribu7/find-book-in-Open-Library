@@ -1,24 +1,15 @@
 import ndCover from "./image-component"
+import researchType from './researchType';
 
-
+const searchSelectType = document.getElementById('search-type');
 const filterReport = document.getElementById('filter-report');
 filterReport.innerHTML = `trovati 0 libri`;
 const searchInput = document.getElementById('search-input');
-const searchSelectType = document.getElementById('search-type');
 const cardsPlace = document.getElementById('cards-place');
 
-const urlSite = 'https://openlibrary.org';
-const imgSize = 'M';
-const researchTypes = {
-    'subjects': '/subjects/',
-    'title': '/search.json?title=',
-    'authors': '/search/authors.json?q=',
-    'general': '/search.json?q=',
-    '/subjects/' : 'subjects',
-    '/search.json?title=': 'title',
-    '/search/authors.json?q=': 'authors',
-    '/search.json?q=': 'general'
-}
+
+
+
 
 
 
@@ -39,7 +30,7 @@ class SearchParameters {
 
     }
     async get() { 
-        this.url = urlSite + this.type + this.search + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
+        this.url = process.env.URL_SITE + this.type + this.search + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
         const response = await fetch(this.url);
         const json = await response.json();
     console.log(this.url)
@@ -49,11 +40,11 @@ class SearchParameters {
 }
 
 function setProperty(library) {
-    if (searchSelectType.value === researchTypes.subjects) {
+    if (searchSelectType.value === researchType.subject) {
         library.works.count = library.work_count;
         library.works.forEach(book => {
             if (book.cover_id != null) {
-                book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + imgSize + '.jpg';
+                book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + process.env.IMG_SIZE + '.jpg';
             } else {
                 book.imgUrl = ndCover.src;
             };
@@ -68,7 +59,7 @@ function setProperty(library) {
     } else {
         library.docs.count = library.numFound;
         library.docs.forEach(book => {
-            book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_i + '-' + imgSize + '.jpg';
+            book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_i + '-' + process.env.IMG_SIZE + '.jpg';
             book.authorsList = book.author_name;
         })
         return library.docs
@@ -233,7 +224,7 @@ searchInput.addEventListener('keydown', (e) => {
                 if (!library.count) {
                 
                     document.getElementById('filter').innerHTML = `
-                    The search has no results. Try searching for a valid ${researchTypes[searchSelectType.value]} in the page <a href = 'https://openlibrary.org${searchSelectType.value}' target ='_blank'> Open Library </a>`; // searchSelectType.value e' sbagliato. Usare meglio il dizionario.
+                    The search has no results. Try searching for a valid ${researchType[searchSelectType.value].type} in the page <a href = 'https://openlibrary.org${searchType[searchSelectType.value].urlToSite}' target ='_blank'> Open Library </a>`; // searchSelectType.value e' sbagliato. Usare meglio il dizionario.
                     $('#btn-scroll').remove()
                 } else {
                     if (document.getElementById('btn-scroll') != null) {
