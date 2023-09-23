@@ -6,13 +6,14 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
     main: path.resolve(__dirname, './src/app.js'),
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: 'main.bundle.js',
     path: path.resolve(__dirname, 'deploy'),
     clean: true
   },
@@ -75,6 +76,8 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
     }),
+
+    new Dotenv(),
 
     new CleanWebpackPlugin()
   ],

@@ -16,6 +16,7 @@
     "bootstrap": "^5.3.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.8.1",
+    "dotenv-webpack": "^8.0.1",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.3",
     "jquery": "^3.7.1",
