@@ -11,7 +11,7 @@ class SearchParameters {
         if (type.includes('json')) {
             
             this.search = search.replace(' ', '+'); 
-            this.separator = '&';
+            this.separator = '&';        
         } else {
             this.search = search.replace(' ', '_') + '.json';
             this.separator = '?'
@@ -23,7 +23,6 @@ class SearchParameters {
 
     }
     async get() { 
-
         this.url = process.env.URL_SITE + this.type + this.search.toLowerCase() + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
        
         const response = await fetch(this.url);
@@ -60,15 +59,18 @@ function setProperty(library) {
     }
 }
 
-class btnScroll {
-    constructor(books) {
-        this.btn = document.createElement('button');
-        this.btn.innerHTML = 'show more';
-        this.btn.style.width = '100%';
-        this.btn.id = 'btn-scroll';
-        $(this.btn).insertAfter(cardsPlace)
-        this.btn.addEventListener('click', () => this.showOthers(books));
+class BtnScroll {
+    constructor() {
+        this.text = 'show more';
+        this.id = 'btn-scroll';
+        this.width = '100%';
     }
+    create() {
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = this.text;
+        this.btn.style.width = this.width;
+        this.btn.id = this.id;
+        $(this.btn).insertAfter(cardsPlace);    }
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
@@ -96,29 +98,35 @@ class btnScroll {
 class Card {
     constructor(book) {
         this.key = book.key;
-        this.card = document.createElement('div');
-        this.card.classList.add('card');
-        this.card.style.width = '15rem';
+        this.title = book.title;
+        this.imgUrl = book.imgUrl;
+        this.authorList = book.authorsList;
+        this.class = 'card';
+        this.width = '15rem'
 
-        this.card.innerHTML = ` 
-            <div class="card-body">
-            <h5 class="card-title">${book.title}</h5>
-            <p class="card-text overflow-auto" style="max-height: 80px" >${(book.authorsList).join(', ')}</p>
-            <img src="${book.imgUrl}" class="card-img-top" alt="cover">
-            </div>
-            `;
-
-        this.card.addEventListener('click', () => this.getDescription())
     }
 
     create() {
+        this.card = document.createElement('div');
+        this.card.classList.add(this.class);
+        this.card.style.width = this.width;
+        
+        this.card.innerHTML = ` 
+        <div class="card-body">
+        <h5 class="card-title">${this.title}</h5>
+        <p class="card-text overflow-auto" style="max-height: 80px" >${(this.authorList).join(', ')}</p>
+        <img src="${this.imgUrl}" class="card-img-top" alt="cover">
+        </div>
+        `;
+        
         cardsPlace.appendChild(this.card);
+        this.card.addEventListener('click', () => this.getDescription())
     }
     getDescription() {
 
         let popup = new PopupIn(this.card);
 
-        let searchBookProperty = new SearchParameters('', this.key);
+        let searchBookProperty = new SearchParameters(this.key,'');
         let bookProprety = searchBookProperty.get();
         let printDescription = async () => {
             bookProprety = await bookProprety;
@@ -225,11 +233,15 @@ window.addEventListener('keydown', (e) => {
 
                     $('#btn-scroll').remove()
                 } else {
+                    let scrolling = new BtnScroll();
                     if (document.getElementById('btn-scroll') != null) {
                         $('#btn-scroll').remove()
-                        new btnScroll(research)
+                        scrolling.create()
+                        $('#btn-scroll').on('click', () => scrolling.showOthers(research))
                     } else {
-                        new btnScroll(research)
+                        scrolling.create();
+                         $('#btn-scroll').on('click', () => scrolling.showOthers(research));
+                        
                     };
                     library.forEach(book => {
                         let card = new Card(book);
