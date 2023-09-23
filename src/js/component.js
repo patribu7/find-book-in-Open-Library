@@ -205,7 +205,7 @@ class Placeholder {
 
 }
 
-searchInput.addEventListener('keydown', (e) => {
+window.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         cardsPlace.innerHTML = '';
