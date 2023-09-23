@@ -101,14 +101,10 @@ class btnScroll {
                     card.create();
                 })
             })
-            .then(library => {
+            .then( () => {
                 placeholder.remove();
 
-
-
             })
-
-
     }
 }
 
@@ -170,7 +166,7 @@ class PopupIn {
     addText(description) {
         switch (typeof description) {
             case 'undefined':
-                this.description = 'description not available 🙄';
+                this.description = '🙄 description not available';
                 break;
             case 'object':
                 this.description = description.value;
@@ -237,7 +233,8 @@ searchInput.addEventListener('keydown', (e) => {
                 if (!library.count) {
                 
                     document.getElementById('filter').innerHTML = `
-                    The search has no results. Try searching for a valid ${researchTypes[searchSelectType.value]} in the page <a href = 'https://openlibrary.org${searchSelectType.value}' target ='_blank'> Open Library </a>`;                    $('#btn-scroll').remove()
+                    The search has no results. Try searching for a valid ${researchTypes[searchSelectType.value]} in the page <a href = 'https://openlibrary.org${searchSelectType.value}' target ='_blank'> Open Library </a>`; // searchSelectType.value e' sbagliato. Usare meglio il dizionario.
+                    $('#btn-scroll').remove()
                 } else {
                     if (document.getElementById('btn-scroll') != null) {
                         $('#btn-scroll').remove()
