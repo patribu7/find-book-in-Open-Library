@@ -17,7 +17,8 @@ class SearchParameters {
     constructor(type, search) {
 
         if (type.includes('json')) {
-            this.search = search.replace(' ', '+');
+            
+            this.search = search.replace(' ', '+'); 
             this.separator = '&';
         } else {
             this.search = search.replace(' ', '_') + '.json';
@@ -30,10 +31,11 @@ class SearchParameters {
 
     }
     async get() { 
-        this.url = process.env.URL_SITE + this.type + this.search + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
+
+        this.url = process.env.URL_SITE + this.type + this.search.toLowerCase() + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
+       
         const response = await fetch(this.url);
         const json = await response.json();
-    console.log(this.url)
         return json
     }
 
