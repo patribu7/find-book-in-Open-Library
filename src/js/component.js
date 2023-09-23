@@ -1,5 +1,6 @@
 import ndCover from "./image-component"
 import researchType from './researchType';
+import { value_search, value_type } from "./getInputValue";
 
 const searchSelectType = document.getElementById('search-type');
 const filterReport = document.getElementById('filter-report');
@@ -36,7 +37,7 @@ class SearchParameters {
 }
 
 function setProperty(library) {
-    if (searchSelectType.value === researchType.subject) {
+    if (value_type() === researchType.subject) {
         library.works.count = library.work_count;
         library.works.forEach(book => {
             if (book.cover_id != null) {
