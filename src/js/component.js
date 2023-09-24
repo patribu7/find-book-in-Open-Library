@@ -52,10 +52,11 @@ function setProperty(library) {
 
     } else if (value_type() === researchType.authors) {
         library.docs.count = library.numFound;
-        library.docs.forEach(book => {
-            book.imgUrl = 'https://covers.openlibrary.org/a/olid/' + book.key + '-' + process.env.IMG_SIZE + '.jpg';
-            book.authorsList = [];
-            book.title = book.name;
+        library.docs.forEach(author => {
+            
+            author.imgUrl = 'https://covers.openlibrary.org/a/olid/' + author.key + '-' + process.env.IMG_SIZE + '.jpg';
+            author.authorsList = [];
+            author.title = author.name;
 
         })
         return library.docs
