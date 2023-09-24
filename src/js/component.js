@@ -27,6 +27,7 @@ class SearchParameters {
 
         const response = await fetch(this.url);
         const json = await response.json();
+        console.log(json)
         return json
     }
 
@@ -43,22 +44,33 @@ function setProperty(library) {
             };
 
             book.authorsList = [];
-            book.authors.forEach(author => book.authorsList.push(author.name)); // forse basta book.author.name
+            book.authors.forEach(author => book.authorsList.push(author.name));
 
 
         });
         return library.works
+
+    } else if (value_type() === researchType.authors) {
+        library.docs.count = library.numFound;
+        library.docs.forEach(book => {
+            book.imgUrl = 'https://covers.openlibrary.org/a/olid/' + book.key + '-' + process.env.IMG_SIZE + '.jpg';
+            book.authorsList = [];
+            book.title = book.name;
+
+        })
+        return library.docs
 
     } else {
         library.docs.count = library.numFound;
         library.docs.forEach(book => {
             book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_i + '-' + process.env.IMG_SIZE + '.jpg';
             book.authorsList = book.author_name;
+
+            
         })
         return library.docs
     }
 }
-
 class BtnScroll {
     constructor() {
         this.text = 'show more';
