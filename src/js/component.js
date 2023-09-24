@@ -9,9 +9,9 @@ class SearchParameters {
     constructor(type, search) {
 
         if (type.includes('json')) {
-            
-            this.search = search.replace(' ', '+'); 
-            this.separator = '&';        
+
+            this.search = search.replace(' ', '+');
+            this.separator = '&';
         } else {
             this.search = search.replace(' ', '_') + '.json';
             this.separator = '?'
@@ -22,9 +22,9 @@ class SearchParameters {
         this.offset = 0;
 
     }
-    async get() { 
+    async get() {
         this.url = process.env.URL_SITE + this.type + this.search.toLowerCase() + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
-       
+
         const response = await fetch(this.url);
         const json = await response.json();
         return json
@@ -70,7 +70,8 @@ class BtnScroll {
         this.btn.innerHTML = this.text;
         this.btn.style.width = this.width;
         this.btn.id = this.id;
-        $(this.btn).insertAfter(cardsPlace);    }
+        $(this.btn).insertAfter(cardsPlace);
+    }
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
@@ -88,7 +89,7 @@ class BtnScroll {
                     card.create();
                 })
             })
-            .then( () => {
+            .then(() => {
                 placeholder.remove();
 
             })
@@ -110,7 +111,7 @@ class Card {
         this.card = document.createElement('div');
         this.card.classList.add(this.class);
         this.card.style.width = this.width;
-        
+
         this.card.innerHTML = ` 
         <div class="card-body">
         <h5 class="card-title">${this.title}</h5>
@@ -118,16 +119,16 @@ class Card {
         <img src="${this.imgUrl}" class="card-img-top" alt="cover">
         </div>
         `;
-        
+
         cardsPlace.appendChild(this.card);
-        this.card.addEventListener('click', () => this.getDescription())
+        this.card.addEventListener('click', () => this.getDescription(), { once: true })
     }
     getDescription() {
 
-        let popup = new PopupIn(this.card);
-        popup.createIn(this.card)
+        let popup = new PopupIn();
+        let popupDOM = popup.createIn(this.card)
 
-        let searchBookProperty = new SearchParameters(this.key,'');
+        let searchBookProperty = new SearchParameters(this.key, '');
         let bookProprety = searchBookProperty.get();
         let printDescription = async () => {
             bookProprety = await bookProprety;
@@ -135,10 +136,22 @@ class Card {
 
         }
         printDescription();
-        this.card.addEventListener('click', popup.switchShow);
+        this.card.addEventListener('click', () => this.switchShow(popupDOM));
 
-        // this.card.removeEventListener('click', this.getDescription);
 
+    }
+    switchShow(popup) {
+        switch (popup.style.display) {
+            case '':
+                popup.style.display = 'none'
+                break;
+            case 'none':
+                popup.style.display = ''
+                break;
+
+            default:
+                break;
+        }
     }
 
 }
@@ -146,7 +159,7 @@ class Card {
 class PopupIn {
     constructor() {
         this.classList = ['position-absolute', 'top-0', 'start-0', 'overflow-auto']
-        this.width= '100%';
+        this.width = '100%';
         this.height = '100%'
         this.background_color = 'rgba(251, 248, 237, 0.85)'
     }
@@ -156,10 +169,12 @@ class PopupIn {
         this.descrDOM.style.width = this.width;
         this.descrDOM.style.height = this.height;
         this.descrDOM.style.background = this.background_color;
+        this.descrDOM.style.display = ''
 
 
         card.appendChild(this.descrDOM)
-    
+        return this.descrDOM
+
     }
 
     addText(description) {
@@ -175,16 +190,6 @@ class PopupIn {
                 break
         }
         this.descrDOM.innerHTML = this.description
-    }
-
-    switchShow() {
-
-        if ($(this.descrDOM).is(':visible')) {
-            $(this.descrDOM).hide
-        } else if ($(this.descrDOM).is(':hidden')) {
-            $(this.descrDOM).show
-
-        }
     }
 }
 
@@ -230,7 +235,7 @@ window.addEventListener('keydown', (e) => {
             .then(library => {
                 filterReport.fill(`trovati ${library.count} libri`);
                 if (!library.count) {
-                
+
                     document.getElementById('filter').innerHTML = `
 
                     The search has no results. Try searching for a valid ${researchType[value_type()].type}
@@ -246,8 +251,8 @@ window.addEventListener('keydown', (e) => {
                         $('#btn-scroll').on('click', () => scrolling.showOthers(research))
                     } else {
                         scrolling.create();
-                         $('#btn-scroll').on('click', () => scrolling.showOthers(research));
-                        
+                        $('#btn-scroll').on('click', () => scrolling.showOthers(research));
+
                     };
                     library.forEach(book => {
                         let card = new Card(book);
