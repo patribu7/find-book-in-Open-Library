@@ -125,6 +125,7 @@ class Card {
     getDescription() {
 
         let popup = new PopupIn(this.card);
+        popup.createIn(this.card)
 
         let searchBookProperty = new SearchParameters(this.key,'');
         let bookProprety = searchBookProperty.get();
@@ -138,22 +139,27 @@ class Card {
 
         // this.card.removeEventListener('click', this.getDescription);
 
-
-
     }
 
 }
 
 class PopupIn {
-    constructor(card) {
+    constructor() {
+        this.classList = ['position-absolute', 'top-0', 'start-0', 'overflow-auto']
+        this.width= '100%';
+        this.height = '100%'
+        this.background_color = 'rgba(251, 248, 237, 0.85)'
+    }
+    createIn(card) {
         this.descrDOM = document.createElement('div');
-        this.descrDOM.classList.add('position-absolute', 'top-0', 'start-0', 'overflow-auto');
-        this.descrDOM.style.width = '100%';
-        this.descrDOM.style.height = '100%';
-        this.descrDOM.style.background = 'rgba(251, 248, 237, 0.85)';
+        this.descrDOM.classList.add(...this.classList);
+        this.descrDOM.style.width = this.width;
+        this.descrDOM.style.height = this.height;
+        this.descrDOM.style.background = this.background_color;
 
 
         card.appendChild(this.descrDOM)
+    
     }
 
     addText(description) {
