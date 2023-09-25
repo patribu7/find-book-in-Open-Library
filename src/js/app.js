@@ -3,7 +3,7 @@ import './image-component';
 import './component';
 
 
-import '../style.css';
+import './css/style.css';
 
 // Import our custom CSS
 import '../scss/styles.scss';
