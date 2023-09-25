@@ -74,14 +74,16 @@ function setProperty(library) {
 }
 class BtnScroll {
     constructor() {
-        this.text = 'show more';
+        this.text = 'SHOW MORE';
         this.id = 'btn-scroll';
         this.width = '100%';
+
     }
     create() {
         this.btn = document.createElement('button');
         this.btn.innerHTML = this.text;
         this.btn.style.width = this.width;
+ 
         this.btn.id = this.id;
         $(this.btn).insertAfter(cardsPlace);
     }
@@ -171,17 +173,14 @@ class Card {
 
 class PopupIn {
     constructor() {
-        this.classList = ['position-absolute', 'top-0', 'start-0', 'overflow-auto']
-        this.width = '100%';
-        this.height = '100%'
-        this.background_color = 'rgba(251, 248, 237, 0.85)'
+        this.classList = ['position-absolute', 'top-0', 'start-0', 'overflow-auto','popup']
+
     }
     createIn(card) {
         this.descrDOM = document.createElement('div');
         this.descrDOM.classList.add(...this.classList);
-        this.descrDOM.style.width = this.width;
-        this.descrDOM.style.height = this.height;
-        this.descrDOM.style.background = this.background_color;
+ 
+    
         this.descrDOM.style.display = ''
 
 

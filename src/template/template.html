@@ -38,14 +38,14 @@
   </nav>
 
   <form role="search" class="form-floating input-group p-4 sticky-top">
-    <select id="search-type" style="max-width: 150px;" class="form-select" aria-label="Default select">
+    <select id="search-type" style="max-width: 150px;" class="form-select pb-1" aria-label="Default select">
       <option value="/subjects/">Subject</option>
       <option value="/search.json?title=">Title</option>
       <!-- <option value="/search/authors.json?q=">Authors</option> -->
       <option value="/search.json?q=">General</option>
     </select>
+    <label for="search-type">search for</label>
     <input id="search-input" class="form-control border-end-0" type="search" placeholder="Search" aria-label="Search">
-    <label for="search-type">Cerca per</label>
 
     <div class="nav-item border border-start-0"><a href="#home" class="link-dark nav-link ">^</a></div>
   </form>
