@@ -4,6 +4,7 @@ import { value_search, value_type } from "./getInputValue";
 import filterReport from "./filters";
 
 const cardsPlace = document.getElementById('cards-place');
+const warning = document.getElementById('warning');
 
 class SearchParameters {
     constructor(type, search) {
@@ -238,18 +239,18 @@ window.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         cardsPlace.innerHTML = '';
-        document.getElementById('warning').innerHTML = '';
+        warning.innerHTML = '';
 
         let placeholder = new Placeholder();
         let research = new SearchParameters(value_type(), value_search());
-
+        filterReport.fill(`trovati 0 libri`);
         placeholder.create()
             .then(() => research.get())
             .then(library => setProperty(library))
             .then(library => {
                 filterReport.fill(`trovati ${library.count} libri`);
                 if (!library.count) {
-                    document.getElementById('warning').innerHTML = `
+                    warning.innerHTML = `
                     The search has no results. Try searching for a valid ${researchType[value_type()].type}
                     in the page <a href = 'https://openlibrary.org${researchType[value_type()].urlToSite}'
                     target ='_blank'> Open Library </a>`;
