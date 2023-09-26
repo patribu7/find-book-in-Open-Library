@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="80"
+   height="80"
+   fill="currentColor"
+   class="bi bi-book-half"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="book-half.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="6"
+     inkscape:cx="22.666667"
+     inkscape:cy="52.583333"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M 8.5,2.687 C 9.154,1.998 10.282,1.801 11.612,1.935 12.846,2.059 14.115,2.458 15,2.828 v 9.923 C 14.082,12.401 12.893,12.059 11.713,11.941 10.619,11.83 9.435,11.902 8.5,12.433 Z M 8,1.783 C 7.015,0.936 5.587,0.81 4.287,0.94 2.773,1.093 1.245,1.612 0.293,2.045 A 0.5,0.5 0 0 0 0,2.5 v 11 a 0.5,0.5 0 0 0 0.707,0.455 c 0.882,-0.4 2.303,-0.881 3.68,-1.02 1.409,-0.142 2.59,0.087 3.223,0.877 a 0.5,0.5 0 0 0 0.78,0 c 0.633,-0.79 1.814,-1.019 3.222,-0.877 1.378,0.139 2.8,0.62 3.681,1.02 A 0.5,0.5 0 0 0 16,13.5 V 2.5 A 0.5,0.5 0 0 0 15.707,2.045 C 14.755,1.612 13.227,1.093 11.713,0.94 10.413,0.809 8.985,0.936 8,1.783 Z"
+     id="path1"
+     style="fill:#02598b;fill-opacity:1" />
+</svg>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8/">
+  <title>
+    find books in OpenLibrary.org
+  </title>
+<script defer src="main.bundle.js"></script><link href="main.css" rel="stylesheet"></head>
+
+<body>
+  <div id = 'home'></div>
+  <nav class="navbar navbar-expand-md" aria-label="navbar">
+    <div class="container-fluid">
+      <img src="assets/images/book-half.svg" alt="LOGO">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar">
+
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+          <li class="nav-item dropdown" style="z-index: 1030;">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Go to</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="https://openlibrary.org/" target="_blank">OpenLibrary.org</a></li>
+              <li><a class="dropdown-item" href="https://github.com/patribu7/find-book-in-Open-Library" target="_blank">Repo and README</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://patribu7.github.io#bio">About me</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <form role="search" class="form-floating input-group p-4 sticky-top">
+    <select id="search-type" style="max-width: 150px;" class="form-select pb-1" aria-label="Default select">
+      <option value="/subjects/">Subject</option>
+      <option value="/search.json?title=">Title</option>
+      <option value="/search.json?q=">General</option>
+    </select>
+    <label for="search-type">search for</label>
+    <input id="search-input" class="form-control border-end-0" type="search" placeholder="Search" aria-label="Search">
+
+    <div class="nav-item"><a href="#home" class="link-dark nav-link ">&emsp;&emsp;⏫</a></div>
+  </form>
+
+  
+  <div id="warning"></div>
+  <div id="filter-report"></div>
+
+  <div style="margin-left:auto; margin-right: auto; width: 75%;" class="">
+    <div id="cards-place" style="margin:auto;" class="d-flex flex-wrap w-75 gap-2">
+
+    </div>
+
+  </div>
+
+
+  <div class="container">
+    <footer class="py-3">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="https://patribu7.github.io/" target="_blank" class="nav-link px-2 text-body-secondary">⏪ Home</a></li>
+        <li class="nav-item"><a href="https://patribu7.github.io/#contacts" target="_blank" class="nav-link px-2 text-body-secondary">Contact me</a></li>
+      </ul>
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><img src="assets/images/github.svg" alt="github"></a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><img src="assets/images/bootstrap.svg" alt="bootstrap"></a></a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><img src="assets/images/icons8-nodejs.svg" alt="node.js"></a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><img src="assets/images/icons8-webpack.svg" alt="webpack"></a></li>
+  
+      </ul>
+      <a target="_blank" href="https://icons8.com/icon/t9oCxEN7McHZ/nodejs">Nodejs</a>
+      <a target="_blank" href="https://icons8.com/icon/1Z0XRfLWlnbO/book">Book</a>
+      <a target="_blank" href="https://icons8.com/icon/c2zmJ2--GehY/webpack">Webpack</a>
+      icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+
+      <p class="text-center text-body-secondary">© 2023 Patrizia Busatto</p>
+    </footer>
+  </div>
+
+</body>
+
+</html>
