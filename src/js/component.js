@@ -207,10 +207,9 @@ class PopupIn {
 
 class Placeholder {
     constructor() {
-        this.card = document.createElement('div');
-        this.card.classList.add('card');
-        this.card.style.width = '15rem';
-        this.card.innerHTML = ` 
+        this.class = 'card';
+        this.width = '15rem';
+        this.innerHTML = ` 
         <div class="card-body">
           <h5 class="card-title placeholder-glow"><span class="placeholder col-6"></span></h5>
           <p class="card-text placeholder-glow">
@@ -223,14 +222,16 @@ class Placeholder {
         </div>
         `;
     }
-
     async create() {
+        this.card = document.createElement('div');
+        this.card.classList.add(this.class);
+        this.card.style.width = this.width;
+        this.card.innerHTML = this.innerHTML;
         await cardsPlace.appendChild(this.card);
     }
     remove() {
         this.card.remove()
     }
-
 }
 
 window.addEventListener('keydown', (e) => {
