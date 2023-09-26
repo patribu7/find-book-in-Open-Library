@@ -38,7 +38,7 @@ function setProperty(library) {
         library.works.count = library.work_count;
         library.works.forEach(book => {
             if (book.cover_id != null) {
-                book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_id + '-' + process.env.IMG_SIZE + '.jpg';
+                book.imgUrl = process.env.URL_COVER + book.cover_id + '-' + process.env.IMG_SIZE + '.jpg';
             } else {
                 book.imgUrl = ndCover.src;
             };
@@ -64,7 +64,7 @@ function setProperty(library) {
     } else {
         library.docs.count = library.numFound;
         library.docs.forEach(book => {
-            book.imgUrl = 'https://covers.openlibrary.org/b/id/' + book.cover_i + '-' + process.env.IMG_SIZE + '.jpg';
+            book.imgUrl = process.env.URL_COVER + book.cover_i + '-' + process.env.IMG_SIZE + '.jpg';
             book.authorsList = book.author_name;
 
             
