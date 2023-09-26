@@ -7,7 +7,9 @@ class FilterReport {
     }
 }
 
-const filterReport = new FilterReport()
-filterReport.fill('trovati 0 libri')
+const report = new FilterReport()
+report.fill('trovati 0 libri')
 
-export default filterReport
+
+
+export {report}

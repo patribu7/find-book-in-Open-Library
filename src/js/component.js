@@ -30,9 +30,8 @@ export class SearchParameters {
         console.log(json)
         return json
     }
-
-}
-
+  }
+  
 export function setProperty(library) {
     if (value_type() === researchType.subject) {
         library.works.count = library.work_count;
@@ -49,17 +48,6 @@ export function setProperty(library) {
 
         });
         return library.works
-
-    } else if (value_type() === researchType.authors) {
-        library.docs.count = library.numFound;
-        library.docs.forEach(author => {
-
-            author.imgUrl = 'https://covers.openlibrary.org/a/olid/' + author.key + '-' + process.env.IMG_SIZE + '.jpg';
-            author.authorsList = [];
-            author.title = author.name;
-
-        })
-        return library.docs
 
     } else {
         library.docs.count = library.numFound;

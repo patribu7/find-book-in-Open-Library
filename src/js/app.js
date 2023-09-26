@@ -27,7 +27,7 @@ import * as bootstrap from 'bootstrap';
 
 
 //----------------------------//
-import filterReport from "./filters";
+import * as filter from "./filters";
 import { value_search, value_type } from "./getInputValue";
 import researchType from './researchType';
 import { SearchParameters, setProperty, BtnScroll, Card, Placeholder } from "./component";
@@ -43,12 +43,12 @@ window.addEventListener('keydown', (e) => {
 
         let placeholder = new Placeholder();
         let research = new SearchParameters(value_type(), value_search());
-        filterReport.fill(`trovati 0 libri`);
+        filter.report.fill(`trovati 0 libri`);
         placeholder.create()
             .then(() => research.get())
             .then(library => setProperty(library))
             .then(library => {
-                filterReport.fill(`trovati ${library.count} libri`);
+                filter.report.fill(`trovati ${library.count} libri`);
                 if (!library.count) {
                     warning.innerHTML = `
                     The search has no results. Try searching for a valid ${researchType[value_type()].type}
