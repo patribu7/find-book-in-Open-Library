@@ -25,18 +25,20 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="9.0708542"
-     inkscape:cx="18.024763"
-     inkscape:cy="35.498311"
-     inkscape:window-width="1388"
-     inkscape:window-height="1040"
-     inkscape:window-x="375"
-     inkscape:window-y="125"
-     inkscape:window-maximized="0"
+     inkscape:cx="17.969642"
+     inkscape:cy="35.553432"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg2" />
   <path
      d="M 6.375,7.125 V 4.658 h 1.78 c 0.973,0 1.542,0.457 1.542,1.237 0,0.802 -0.604,1.23 -1.764,1.23 z m 0,3.762 h 1.898 c 1.184,0 1.81,-0.48 1.81,-1.377 0,-0.885 -0.65,-1.348 -1.886,-1.348 H 6.375 Z"
-     id="path1" />
+     id="path1"
+     style="fill:#02598b;fill-opacity:1" />
   <path
      d="m 4.002,0 a 4,4 0 0 0 -4,4 v 8 a 4,4 0 0 0 4,4 h 8 a 4,4 0 0 0 4,-4 V 4 a 4,4 0 0 0 -4,-4 z m 1.06,12 V 3.545 h 3.399 c 1.587,0 2.543,0.809 2.543,2.11 0,0.884 -0.65,1.675 -1.483,1.816 v 0.1 c 1.143,0.117 1.904,0.931 1.904,2.033 0,1.488 -1.084,2.396 -2.888,2.396 z"
-     id="path2" />
+     id="path2"
+     style="fill:#02598b;fill-opacity:1" />
 </svg>
