@@ -78,7 +78,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./src/template/template.html"),
-      title: "trova libri in Open Library",
       filename: 'index.html',
     }),
     new miniCssExtractPlugin(),
