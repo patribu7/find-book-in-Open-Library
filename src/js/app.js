@@ -31,6 +31,7 @@ import * as filter from "./filters";
 import { value_search, value_type } from "./getInputValue";
 import researchType from './researchType';
 import { SearchParameters, setProperty, BtnScroll, Card, Placeholder } from "./component";
+import { error } from 'jquery';
 
 const cardsPlace = document.getElementById('cards-place');
 const warning = document.getElementById('warning');
@@ -72,8 +73,12 @@ window.addEventListener('keydown', (e) => {
                         card.create();
                     })
                 }
-                placeholder.remove();
+                placeholder.remove()
 
             })
+            .catch((error) => {
+                alert(error + '<br> charset not allowed');
+                placeholder.remove()
+        })
     }
 })
