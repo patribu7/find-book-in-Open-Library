@@ -53,7 +53,7 @@ function setProperty(library) {
     } else if (value_type() === researchType.authors) {
         library.docs.count = library.numFound;
         library.docs.forEach(author => {
-            
+
             author.imgUrl = 'https://covers.openlibrary.org/a/olid/' + author.key + '-' + process.env.IMG_SIZE + '.jpg';
             author.authorsList = [];
             author.title = author.name;
@@ -67,7 +67,7 @@ function setProperty(library) {
             book.imgUrl = process.env.URL_COVER + book.cover_i + '-' + process.env.IMG_SIZE + '.jpg';
             book.authorsList = book.author_name;
 
-            
+
         })
         return library.docs
     }
@@ -83,7 +83,7 @@ class BtnScroll {
         this.btn = document.createElement('button');
         this.btn.innerHTML = this.text;
         this.btn.style.width = this.width;
- 
+
         this.btn.id = this.id;
         $(this.btn).insertAfter(cardsPlace);
     }
@@ -173,14 +173,14 @@ class Card {
 
 class PopupIn {
     constructor() {
-        this.classList = ['position-absolute', 'top-0', 'start-0', 'overflow-auto','popup']
+        this.classList = ['position-absolute', 'top-0', 'start-0', 'overflow-auto', 'popup']
 
     }
     createIn(card) {
         this.descrDOM = document.createElement('div');
         this.descrDOM.classList.add(...this.classList);
- 
-    
+
+
         this.descrDOM.style.display = ''
 
 
@@ -238,6 +238,7 @@ window.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         cardsPlace.innerHTML = '';
+        document.getElementById('warning').innerHTML = '';
 
         let placeholder = new Placeholder();
         let research = new SearchParameters(value_type(), value_search());
@@ -248,9 +249,7 @@ window.addEventListener('keydown', (e) => {
             .then(library => {
                 filterReport.fill(`trovati ${library.count} libri`);
                 if (!library.count) {
-
-                    document.getElementById('filter').innerHTML = `
-
+                    document.getElementById('warning').innerHTML = `
                     The search has no results. Try searching for a valid ${researchType[value_type()].type}
                     in the page <a href = 'https://openlibrary.org${researchType[value_type()].urlToSite}'
                     target ='_blank'> Open Library </a>`;
@@ -258,7 +257,7 @@ window.addEventListener('keydown', (e) => {
                     $('#btn-scroll').remove()
                 } else {
                     let scrolling = new BtnScroll();
-                    if (document.getElementById('btn-scroll') != null) {
+                    if ($('#btn-scroll') != null) {
                         $('#btn-scroll').remove()
                         scrolling.create()
                         $('#btn-scroll').on('click', () => scrolling.showOthers(research))
