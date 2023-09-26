@@ -1,12 +1,11 @@
 import ndCover from "./image-component"
 import researchType from './researchType';
-import { value_search, value_type } from "./getInputValue";
-import filterReport from "./filters";
+import { value_type } from "./getInputValue";
 
 const cardsPlace = document.getElementById('cards-place');
-const warning = document.getElementById('warning');
 
-class SearchParameters {
+
+export class SearchParameters {
     constructor(type, search) {
 
         if (type.includes('json')) {
@@ -34,7 +33,7 @@ class SearchParameters {
 
 }
 
-function setProperty(library) {
+export function setProperty(library) {
     if (value_type() === researchType.subject) {
         library.works.count = library.work_count;
         library.works.forEach(book => {
@@ -73,7 +72,7 @@ function setProperty(library) {
         return library.docs
     }
 }
-class BtnScroll {
+export class BtnScroll {
     constructor() {
         this.text = 'SHOW MORE';
         this.id = 'btn-scroll';
@@ -112,7 +111,7 @@ class BtnScroll {
     }
 }
 
-class Card {
+export class Card {
     constructor(book) {
         this.key = book.key;
         this.title = book.title;
@@ -206,7 +205,7 @@ class PopupIn {
     }
 }
 
-class Placeholder {
+export class Placeholder {
     constructor() {
         this.class = 'card';
         this.width = '15rem';
@@ -234,46 +233,3 @@ class Placeholder {
         this.card.remove()
     }
 }
-
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        cardsPlace.innerHTML = '';
-        warning.innerHTML = '';
-
-        let placeholder = new Placeholder();
-        let research = new SearchParameters(value_type(), value_search());
-        filterReport.fill(`trovati 0 libri`);
-        placeholder.create()
-            .then(() => research.get())
-            .then(library => setProperty(library))
-            .then(library => {
-                filterReport.fill(`trovati ${library.count} libri`);
-                if (!library.count) {
-                    warning.innerHTML = `
-                    The search has no results. Try searching for a valid ${researchType[value_type()].type}
-                    in the page <a href = 'https://openlibrary.org${researchType[value_type()].urlToSite}'
-                    target ='_blank'> Open Library </a>`;
-
-                    $('#btn-scroll').remove()
-                } else {
-                    let scrolling = new BtnScroll();
-                    if ($('#btn-scroll') != null) {
-                        $('#btn-scroll').remove()
-                        scrolling.create()
-                        $('#btn-scroll').on('click', () => scrolling.showOthers(research))
-                    } else {
-                        scrolling.create();
-                        $('#btn-scroll').on('click', () => scrolling.showOthers(research));
-
-                    };
-                    library.forEach(book => {
-                        let card = new Card(book);
-                        card.create();
-                    })
-                }
-                placeholder.remove();
-
-            })
-    }
-})
