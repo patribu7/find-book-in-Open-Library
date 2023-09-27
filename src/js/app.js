@@ -1,11 +1,7 @@
 
 import './image-component';
 import './component';
-
-
 import '../css/style.css';
-
-// Import our custom CSS
 import '../scss/styles.scss';
 
 // Import all of Bootstrap's JS
@@ -62,13 +58,11 @@ function executeSearch() {
             placeholder.remove()
 
         })
+
         .catch((error) => {
             
             console.error(error);
-            alert('Charset not allowed')
-                    ;
-
-        
+            alert('Charset not allowed');
             placeholder.remove()
         })
 }

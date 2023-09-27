@@ -18,13 +18,13 @@ export class SearchParameters {
         }
         this.type = type;
 
-        this.limit = 4;
+        this.limit = 10;
         this.offset = 0;
 
     }
     async get() {
         this.url = process.env.URL_SITE + this.type + this.search.toLowerCase() + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
-
+        console.log(this.url)
         const response = await fetch(this.url);
         const json = await response.json();
         console.log(json)
@@ -107,9 +107,7 @@ export class Card {
         this.authorList = book.authorsList;
         this.class = 'card';
         this.width = '15rem'
-
     }
-
     create() {
         this.card = document.createElement('div');
         this.card.classList.add(this.class);
@@ -156,9 +154,7 @@ export class Card {
                 break;
         }
     }
-
 }
-
 class PopupIn {
     constructor() {
         this.classList = ['position-absolute', 'top-0', 'start-0', 'overflow-auto', 'popup']
@@ -167,16 +163,11 @@ class PopupIn {
     createIn(card) {
         this.descrDOM = document.createElement('div');
         this.descrDOM.classList.add(...this.classList);
-
-
         this.descrDOM.style.display = ''
-
 
         card.appendChild(this.descrDOM)
         return this.descrDOM
-
     }
-
     addText(description) {
         switch (typeof description) {
             case 'undefined':

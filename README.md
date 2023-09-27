@@ -8,7 +8,6 @@ test it __[here](https://patribu7.github.io/find-books-in-OpenLibrary/)__!
 2. Type something appropriate in the search bar
 3. Press Enter
 4. Click on the books whose description you want to view
-5. Click agian to dismiss descripion
+5. Click again to dismiss descripion
 
-### Features
 
