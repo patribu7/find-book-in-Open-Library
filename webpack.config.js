@@ -39,7 +39,7 @@ module.exports = {
         },
       },
       {
-        test:/\.html$/,
+        test: /\.html$/,
         use: [
           'html-loader'
         ]
@@ -77,6 +77,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
+
       template: path.resolve(__dirname, "./src/template/template.html"),
       filename: 'index.html',
     }),

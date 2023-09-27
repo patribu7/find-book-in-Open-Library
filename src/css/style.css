@@ -40,3 +40,7 @@ label {
   color: #02598b;
   border-color: #02598b
 }
+
+#search-input {
+  max-width: 50%;
+}
