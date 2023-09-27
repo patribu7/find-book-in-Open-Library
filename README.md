@@ -1,7 +1,7 @@
 # Find books in OpenLibrary.org
 Web App to search for books in the OpenLibrary.org catalog as an exercise in using the API.
 
-test it__[here](https://patribu7.github.io/find-books-in-OpenLibrary.org/)__!
+test it __[here](https://patribu7.github.io/find-books-in-OpenLibrary/)__!
 
 ## Usage
 1. Select the type of search you want to experience

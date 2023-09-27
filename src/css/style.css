@@ -27,3 +27,16 @@ footer {
 a {
   color: darkgoldenrod
 }
+
+input#search-input::placeholder {
+  color: gray !important;
+}
+
+label {
+  transform: translate(20px, 10px) !important;
+}
+
+#search-button {
+  color: #02598b;
+  border-color: #02598b
+}

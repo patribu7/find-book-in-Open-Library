@@ -19,12 +19,13 @@ import researchType from './researchType';
 import { SearchParameters, setProperty, BtnScroll, Card, Placeholder } from "./component";
 import { error } from 'jquery';
 
+const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
 const cardsPlace = document.getElementById('cards-place');
 const warning = document.getElementById('warning');
 
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
+function executeSearch() {
+    
         cardsPlace.innerHTML = '';
         warning.innerHTML = '';
 
@@ -66,5 +67,13 @@ window.addEventListener('keydown', (e) => {
                 alert(error + '<br> charset not allowed');
                 placeholder.remove()
         })
+}
+
+searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        executeSearch()
     }
 })
+
+searchButton.addEventListener('click', () => executeSearch())
