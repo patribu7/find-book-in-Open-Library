@@ -3,8 +3,13 @@
 
 <head>
   <meta charset="utf-8/">
+  <meta lang="en">
+  <meta property="og:title" content="find books in OpenLibrary.org" />
+  <meta property="og:description" content="A tool to search books in Open Library" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+
   <title>
-    find books in OpenLibrary.org
+    Find books in OpenLibrary.org
   </title>
 <script defer src="main.bundle.js"></script><link href="main.css" rel="stylesheet"></head>
 
@@ -21,15 +26,20 @@
       <div class="collapse navbar-collapse" id="navbar">
 
         <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+          
           <li class="nav-item dropdown" style="z-index: 1030;">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Go to</a>
+            
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="https://openlibrary.org/" target="_blank">OpenLibrary.org</a></li>
-              <li><a class="dropdown-item" href="https://github.com/patribu7/find-book-in-Open-Library" target="_blank">Repo and README</a></li>
+              <li><a class="dropdown-item" href="https://github.com/patribu7/find-book-in-Open-Library" target="_blank">Usage</a></li>
+              <li><a class="dropdown-item" href="https://github.com/patribu7/find-book-in-Open-Library" target="_blank">Repo GitHub</a></li>
             </ul>
+
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="https://patribu7.github.io#bio">About me</a>
+            <a class="nav-link" href="https://patribu7.github.io#bio" target="_blank">About me</a>
           </li>
 
         </ul>
@@ -45,22 +55,17 @@
       <option value="/search.json?q=">General</option>
     </select>
     <label for="search-type">search for</label>
-    <input id="search-input" class="form-control border-end-0" type="search" placeholder="Search" aria-label="Search">
-
+    <input id="search-input" class="form-control" type="search" placeholder="Choose a mode then press Enter" aria-label="Search">
+    <button id="search-button" type="button" class="btn btn-outline-primary">search</button>
     <div class="nav-item"><a href="#home" class="link-dark nav-link ">&emsp;&emsp;⏫</a></div>
   </form>
 
-  
   <div id="warning"></div>
   <div id="filter-report"></div>
 
   <div style="margin-left:auto; margin-right: auto; width: 75%;" class="">
-    <div id="cards-place" style="margin:auto;" class="d-flex flex-wrap w-75 gap-2">
-
-    </div>
-
+    <div id="cards-place" style="margin:auto;" class="d-flex flex-wrap w-75 gap-2"></div>
   </div>
-
 
   <div class="container">
     <footer class="py-3">
@@ -69,19 +74,21 @@
         <li class="nav-item"><a href="https://patribu7.github.io/#contacts" target="_blank" class="nav-link px-2 text-body-secondary">Contact me</a></li>
       </ul>
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><img src="assets/images/github.svg" alt="github"></a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><img src="assets/images/bootstrap.svg" alt="bootstrap"></a></a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><img src="assets/images/icons8-nodejs.svg" alt="node.js"></a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><img src="assets/images/icons8-webpack.svg" alt="webpack"></a></li>
-  
+        <li class="nav-item"><a href="https://github.com/patribu7/find-book-in-Open-Library" target="_blank" class="nav-link px-2 text-body-secondary"><img src="assets/images/github.svg" alt="github"></a></li>
+        <li class="nav-item"><a href="https://getbootstrap.com/" target="_blank" class="nav-link px-2 text-body-secondary" ><img src="assets/images/bootstrap.svg" alt="bootstrap"></a></a></li>
+        <li class="nav-item"><a href="https://nodejs.org/" target="_blank" class="nav-link px-2 text-body-secondary"><img src="assets/images/icons8-nodejs.svg" alt="node.js"></a></li>
+        <li class="nav-item"><a href="https://webpack.js.org/" target="_blank" class="nav-link px-2 text-body-secondary"><img src="assets/images/icons8-webpack.svg" alt="webpack"></a></li>
+        <li class="nav-item"><a href="https://jquery.com/"  target="_blank" class="nav-link px-2 text-body-secondary"><img src="assets/images/icons8-jquery.svg" alt="webpack"></a></li>
+
       </ul>
       <a target="_blank" href="https://icons8.com/icon/t9oCxEN7McHZ/nodejs">Nodejs</a>
       <a target="_blank" href="https://icons8.com/icon/1Z0XRfLWlnbO/book">Book</a>
       <a target="_blank" href="https://icons8.com/icon/c2zmJ2--GehY/webpack">Webpack</a>
+      <a target="_blank" href="https://icons8.com/icon/40253/jquery">JQuery</a>
       icons by <a target="_blank" href="https://icons8.com">Icons8</a>
-
-
-      <p class="text-center text-body-secondary">© 2023 Patrizia Busatto</p>
+<div class="copy">
+  <p class="text-center text-body-secondary">© 2023 Patrizia Busatto</p>
+</div>
     </footer>
   </div>
 
