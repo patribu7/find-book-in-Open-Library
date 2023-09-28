@@ -30,8 +30,8 @@ export class SearchParameters {
         console.log(json)
         return json
     }
-  }
-  
+}
+
 export function setProperty(library) {
     if (value_type() === researchType.subject) {
         library.works.count = library.work_count;
@@ -82,9 +82,8 @@ export class BtnScroll {
 
         let placeholder = new Placeholder();
         placeholder.create()
-            .then(() => books.get()
+        books.get()
 
-            )
             .then(library => setProperty(library))
             .then(library => {
                 library.forEach(book => {
@@ -201,12 +200,12 @@ export class Placeholder {
         </div>
         `;
     }
-    async create() {
+    create() {
         this.card = document.createElement('div');
         this.card.classList.add(this.class);
         this.card.style.width = this.width;
         this.card.innerHTML = this.innerHTML;
-        await cardsPlace.appendChild(this.card);
+        cardsPlace.appendChild(this.card);
     }
     remove() {
         this.card.remove()

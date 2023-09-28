@@ -28,7 +28,7 @@ function executeSearch() {
     let research = new SearchParameters(value_type(), value_search());
     filter.report.fill(`trovati 0 libri`);
     placeholder.create()
-        .then(() => research.get())
+        research.get()
         .then(library => setProperty(library))
         .then(library => {
             filter.report.fill(`trovati ${library.count} libri`);
