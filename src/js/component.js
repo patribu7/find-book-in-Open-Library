@@ -27,7 +27,7 @@ export class SearchParameters {
         console.log(this.url)
         const response = await fetch(this.url);
         const json = await response.json();
-        console.log(json)
+
         return json
     }
 }
@@ -121,22 +121,26 @@ export class Card {
         `;
 
         cardsPlace.appendChild(this.card);
-        this.card.addEventListener('click', () => this.getDescription(), { once: true })
+        this.card.addEventListener('click', () => {
+            this.getDescription()
+            .then(description => this.print(description))
+        },
+            { once: true })
     }
-    getDescription() {
-
+    async getDescription() {
+        let searchBookProperty = new SearchParameters(this.key, '');
+        let bookProprety = await searchBookProperty.get();
+        let bookDescription = bookProprety.description;
+        return bookDescription
+    }
+    async print(description) {        
         let popup = new PopupIn();
         let popupDOM = popup.createIn(this.card)
 
-        let searchBookProperty = new SearchParameters(this.key, '');
-        let bookProprety = searchBookProperty.get();
-        let printDescription = async () => {
-            bookProprety = await bookProprety;
-            popup.addText(bookProprety.description)
-
-        }
-        printDescription();
+        popup.addText(description);
         this.card.addEventListener('click', () => this.switchShow(popupDOM));
+
+
 
 
     }
