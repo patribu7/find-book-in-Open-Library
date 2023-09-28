@@ -92,7 +92,7 @@ export class BtnScroll {
                     card.create();
                 })
             })
-            .then(() => {
+            .finally(() => {
                 placeholder.remove();
 
             })

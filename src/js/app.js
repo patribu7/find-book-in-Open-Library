@@ -55,7 +55,7 @@ function executeSearch() {
                     card.create();
                 })
             }
-            placeholder.remove()
+            
 
         })
 
@@ -63,8 +63,9 @@ function executeSearch() {
             
             console.error(error);
             alert('Charset not allowed');
-            placeholder.remove()
+            
         })
+        .finally(() => placeholder.remove())
 }
 
 searchInput.addEventListener('keydown', (e) => {
