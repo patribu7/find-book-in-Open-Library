@@ -1,9 +1,9 @@
 import ndCover from "./image-component"
-import { value_type } from "../config";
-import researchType from '../researchType';
+import {getValueType } from "../config";
+import * as cf from '../config';
 
 export default function setProperty(library) {
-    if (value_type() === researchType.subject) {
+    if (getValueType() === cf.researchType.subject) {
         library.works.count = library.work_count;
         library.works.forEach(book => {
             if (book.cover_id != null) {

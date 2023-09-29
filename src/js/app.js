@@ -17,14 +17,14 @@ const searchButton = document.getElementById('search-button');
 
 searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        let research = new SearchParameters(cf.value_type(), cf.value_search());
+        let research = new SearchParameters(cf.getValueType(), cf.getValueSearch());
         e.preventDefault();
         executeSearch(true, research)
     }
 })
 
 searchButton.addEventListener('click', () => {
-    let research = new SearchParameters(cf.value_type(), cf.value_search());
+    let research = new SearchParameters(cf.getValueType(), cf.getValueSearch());
     executeSearch(true, research);
 
 })

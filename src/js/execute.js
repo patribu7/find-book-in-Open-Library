@@ -1,5 +1,4 @@
 import * as filter from "./components/filters-component";
-import researchType from './researchType';
 import BtnScroll from "./components/btn-component";
 
 import setProperty from "./components/handleObj-component";
@@ -27,8 +26,8 @@ export function executeSearch(isFirstSearch, research) {
 
                 if (!library.count) {
                     warning.innerHTML = `
-                    The search has no results. Try searching for a valid ${researchType[cf.value_type()].type}
-                    in the page <a href = 'https://openlibrary.org${researchType[cf.value_type()].urlToSite}'
+                    The search has no results. Try searching for a valid ${cf.researchType[cf.getValueType()].type}
+                    in the page <a href = 'https://openlibrary.org${cf.researchType[cf.getValueType()].urlToSite}'
                     target ='_blank'> Open Library </a>`;
 
 
