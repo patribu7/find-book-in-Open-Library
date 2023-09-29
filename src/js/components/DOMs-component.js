@@ -1,102 +1,5 @@
-import ndCover from "./image-component"
-import researchType from './researchType';
-import { value_type } from "./getInputValue";
-
-const cardsPlace = document.getElementById('cards-place');
-
-
-export class SearchParameters {
-    constructor(type, search) {
-
-        if (type.includes('json')) {
-
-            this.search = search.replace(' ', '+');
-            this.separator = '&';
-        } else {
-            this.search = search.replace(' ', '_') + '.json';
-            this.separator = '?'
-        }
-        this.type = type;
-
-        this.limit = 10;
-        this.offset = 0;
-
-    }
-    async get() {
-        this.url = process.env.URL_SITE + this.type + this.search.toLowerCase() + this.separator + 'limit=' + this.limit + '&offset=' + this.offset;
-        console.log(this.url)
-        const response = await fetch(this.url);
-        const json = await response.json();
-
-        return json
-    }
-}
-
-export function setProperty(library) {
-    if (value_type() === researchType.subject) {
-        library.works.count = library.work_count;
-        library.works.forEach(book => {
-            if (book.cover_id != null) {
-                book.imgUrl = process.env.URL_COVER + book.cover_id + '-' + process.env.IMG_SIZE + '.jpg';
-            } else {
-                book.imgUrl = ndCover.src;
-            };
-
-            book.authorsList = [];
-            book.authors.forEach(author => book.authorsList.push(author.name));
-
-
-        });
-        return library.works
-
-    } else {
-        library.docs.count = library.numFound;
-        library.docs.forEach(book => {
-            book.imgUrl = process.env.URL_COVER + book.cover_i + '-' + process.env.IMG_SIZE + '.jpg';
-            book.authorsList = book.author_name;
-
-
-        })
-        return library.docs
-    }
-}
-export class BtnScroll {
-    constructor() {
-        this.text = 'SHOW MORE';
-        this.id = 'btn-scroll';
-        this.width = '100%';
-
-    }
-    create() {
-        this.btn = document.createElement('button');
-        this.btn.innerHTML = this.text;
-        this.btn.style.width = this.width;
-
-        this.btn.id = this.id;
-        $(this.btn).insertAfter(cardsPlace);
-    }
-
-    showOthers(books) {
-        books.offset = books.offset + books.limit;
-
-
-        let placeholder = new Placeholder();
-        placeholder.create()
-        books.get()
-
-            .then(library => setProperty(library))
-            .then(library => {
-                library.forEach(book => {
-                    let card = new Card(book);
-                    card.create();
-                })
-            })
-            .finally(() => {
-                placeholder.remove();
-
-            })
-    }
-}
+import * as cf from '../config';
+import SearchParameters from "../components/search-component";
 
 export class Card {
     constructor(book) {
@@ -120,7 +23,8 @@ export class Card {
         </div>
         `;
 
-        cardsPlace.appendChild(this.card);
+        cf.cardsPlace.appendChild(this.card);
+        
         this.card.addEventListener('click', () => {
             this.getDescription()
             .then(description => this.print(description))
@@ -139,10 +43,6 @@ export class Card {
 
         popup.addText(description);
         this.card.addEventListener('click', () => this.switchShow(popupDOM));
-
-
-
-
     }
     switchShow(popup) {
         switch (popup.style.display) {
@@ -209,7 +109,7 @@ export class Placeholder {
         this.card.classList.add(this.class);
         this.card.style.width = this.width;
         this.card.innerHTML = this.innerHTML;
-        cardsPlace.appendChild(this.card);
+        cf.cardsPlace.appendChild(this.card);
     }
     remove() {
         this.card.remove()

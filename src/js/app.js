@@ -1,6 +1,6 @@
 
-import './image-component';
-import './component';
+import './components/image-component';
+import './components/btn-component';
 import '../css/style.css';
 import '../scss/styles.scss';
 
@@ -9,23 +9,26 @@ import * as bootstrap from 'bootstrap';
 
 
 //----------------------------//
-import * as filter from "./filters";
-import { value_search, value_type } from "./getInputValue";
+import * as filter from "./components/filters-component";
 import researchType from './researchType';
-import { SearchParameters, setProperty, BtnScroll, Card, Placeholder } from "./component";
+import BtnScroll from "./components/btn-component";
+import SearchParameters from "./components/search-component";
+import setProperty from "./components/handleObj-component";
+import { Card, Placeholder } from './components/DOMs-component';
+import * as cf from './config';
 
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
-const cardsPlace = document.getElementById('cards-place');
+
 const warning = document.getElementById('warning');
 
 function executeSearch() {
 
-    cardsPlace.innerHTML = '';
+    cf.cardsPlace.innerHTML = '';
     warning.innerHTML = '';
 
     let placeholder = new Placeholder();
-    let research = new SearchParameters(value_type(), value_search());
+    let research = new SearchParameters(cf.value_type(), cf.value_search());
     filter.report.fill(`trovati 0 libri`);
     placeholder.create()
         research.get()
@@ -34,8 +37,8 @@ function executeSearch() {
             filter.report.fill(`trovati ${library.count} libri`);
             if (!library.count) {
                 warning.innerHTML = `
-                    The search has no results. Try searching for a valid ${researchType[value_type()].type}
-                    in the page <a href = 'https://openlibrary.org${researchType[value_type()].urlToSite}'
+                    The search has no results. Try searching for a valid ${researchType[cf.value_type()].type}
+                    in the page <a href = 'https://openlibrary.org${researchType[cf.value_type()].urlToSite}'
                     target ='_blank'> Open Library </a>`;
 
                 $('#btn-scroll').remove()
@@ -55,10 +58,7 @@ function executeSearch() {
                     card.create();
                 })
             }
-            
-
         })
-
         .catch((error) => {
             
             console.error(error);
