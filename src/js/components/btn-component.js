@@ -20,12 +20,10 @@ export default class BtnScroll {
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
-
-
+        
         let placeholder = new Placeholder();
         placeholder.createIn(cf.cardsPlace)
         books.get()
-
             .then(library => setProperty(library))
             .then(library => {
                 library.forEach(book => {
