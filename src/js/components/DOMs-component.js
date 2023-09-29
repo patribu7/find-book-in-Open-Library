@@ -1,5 +1,5 @@
 import SearchParameters from "../components/search-component";
-
+// l'elemento DOM di ogni libro da visualizzare a schermo
 export class Card {
     constructor(book) {
         this.key = book.key;
@@ -57,6 +57,8 @@ export class Card {
         }
     }
 }
+
+// per creare il popup contenente la descrizione in ogni card
 class PopupIn {
     constructor() {
         this.classList = ['position-absolute', 'top-0', 'start-0', 'overflow-auto', 'popup']
@@ -86,6 +88,7 @@ class PopupIn {
     }
 }
 
+// loading di caricamento
 export class Placeholder {
     constructor() {
         this.class = 'card';

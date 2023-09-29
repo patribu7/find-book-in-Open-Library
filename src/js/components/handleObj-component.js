@@ -2,6 +2,7 @@ import ndCover from "./image-component"
 import {getValueType } from "../config";
 import * as cf from '../config';
 
+// manipolazione degli oggetti ottenuti interrobgando le API per poter ottenere i dati voluti: numero dei libri totali trovati, url della copertina, lista autori
 export default function setProperty(library) {
     if (getValueType() === cf.researchType.subject) {
         library.works.count = library.work_count;

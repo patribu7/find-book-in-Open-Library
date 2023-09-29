@@ -1,3 +1,4 @@
+// controlli e raccolta dei dati e interrogazione delle API con tali dati
 export default class SearchParameters {
     constructor(type, search) {
 

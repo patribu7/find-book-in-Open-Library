@@ -1,3 +1,4 @@
+// il report di quenti libri totali si son trovati interrogando le API
 class FilterReport {
     constructor() {
         this.DOM = document.getElementById('filter-report');
