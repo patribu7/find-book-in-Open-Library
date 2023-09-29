@@ -1,5 +1,5 @@
 import ndCover from "./image-component"
-import {getValueType } from "../config";
+import { getValueType } from "../config";
 import * as cf from '../config';
 
 // manipolazione degli oggetti ottenuti interrobgando le API per poter ottenere i dati voluti: numero dei libri totali trovati, url della copertina, lista autori
@@ -23,7 +23,13 @@ export default function setProperty(library) {
     } else {
         library.docs.count = library.numFound;
         library.docs.forEach(book => {
-            book.imgUrl = process.env.URL_COVER + book.cover_i + '-' + process.env.IMG_SIZE + '.jpg';
+            if (book.cover_i != null) {
+
+                book.imgUrl = process.env.URL_COVER + book.cover_i + '-' + process.env.IMG_SIZE + '.jpg';
+            } else {
+                book.imgUrl = ndCover.src;
+            }
+
             book.authorsList = book.author_name;
 
 
