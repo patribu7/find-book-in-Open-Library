@@ -1,4 +1,3 @@
-import * as cf from '../config';
 import SearchParameters from "../components/search-component";
 
 export class Card {
@@ -10,7 +9,7 @@ export class Card {
         this.class = 'card';
         this.width = '15rem'
     }
-    create() {
+    createIn(place) {
         this.card = document.createElement('div');
         this.card.classList.add(this.class);
         this.card.style.width = this.width;
@@ -23,7 +22,7 @@ export class Card {
         </div>
         `;
 
-        cf.cardsPlace.appendChild(this.card);
+        place.appendChild(this.card);
         
         this.card.addEventListener('click', () => {
             this.getDescription()
@@ -104,12 +103,12 @@ export class Placeholder {
         </div>
         `;
     }
-    create() {
+    createIn(place) {
         this.card = document.createElement('div');
         this.card.classList.add(this.class);
         this.card.style.width = this.width;
         this.card.innerHTML = this.innerHTML;
-        cf.cardsPlace.appendChild(this.card);
+        place.appendChild(this.card);
     }
     remove() {
         this.card.remove()

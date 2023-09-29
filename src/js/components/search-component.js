@@ -11,7 +11,7 @@ export default class SearchParameters {
         }
         this.type = type;
 
-        this.limit = 10;
+        this.limit = 4;
         this.offset = 0;
 
     }

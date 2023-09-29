@@ -30,7 +30,7 @@ function executeSearch() {
     let placeholder = new Placeholder();
     let research = new SearchParameters(cf.value_type(), cf.value_search());
     filter.report.fill(`trovati 0 libri`);
-    placeholder.create()
+    placeholder.createIn(cf.cardsPlace)
         research.get()
         .then(library => setProperty(library))
         .then(library => {
@@ -46,16 +46,16 @@ function executeSearch() {
                 let scrolling = new BtnScroll();
                 if ($('#btn-scroll') != null) {
                     $('#btn-scroll').remove()
-                    scrolling.create()
+                    scrolling.createIn(cf.cardsPlace)
                     $('#btn-scroll').on('click', () => scrolling.showOthers(research))
                 } else {
-                    scrolling.create();
+                    scrolling.createIn(cf.cardsPlace);
                     $('#btn-scroll').on('click', () => scrolling.showOthers(research));
 
                 };
                 library.forEach(book => {
                     let card = new Card(book);
-                    card.create();
+                    card.createIn(cf.cardsPlace);
                 })
             }
         })

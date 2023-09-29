@@ -9,13 +9,13 @@ export default class BtnScroll {
         this.width = '100%';
 
     }
-    create() {
+    createIn(place) {
         this.btn = document.createElement('button');
         this.btn.innerHTML = this.text;
         this.btn.style.width = this.width;
 
         this.btn.id = this.id;
-        $(this.btn).insertAfter(cf.cardsPlace);
+        $(this.btn).insertAfter(place);
     }
 
     showOthers(books) {
@@ -23,14 +23,14 @@ export default class BtnScroll {
 
 
         let placeholder = new Placeholder();
-        placeholder.create()
+        placeholder.createIn(cf.cardsPlace)
         books.get()
 
             .then(library => setProperty(library))
             .then(library => {
                 library.forEach(book => {
                     let card = new Card(book);
-                    card.create();
+                    card.createIn(cf.cardsPlace);
                 })
             })
             .finally(() => {
