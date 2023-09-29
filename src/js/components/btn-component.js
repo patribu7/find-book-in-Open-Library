@@ -1,6 +1,4 @@
-import { Placeholder, Card } from "./DOMs-component";
-import * as cf from '../config';
-import setProperty from "./handleObj-component";
+import { executeSearch } from "../execute";
 
 export default class BtnScroll {
     constructor() {
@@ -20,21 +18,7 @@ export default class BtnScroll {
 
     showOthers(books) {
         books.offset = books.offset + books.limit;
-        
-        let placeholder = new Placeholder();
-        placeholder.createIn(cf.cardsPlace)
-        books.get()
-            .then(library => setProperty(library))
-            .then(library => {
-                library.forEach(book => {
-                    let card = new Card(book);
-                    card.createIn(cf.cardsPlace);
-                })
-            })
-            .finally(() => {
-                placeholder.remove();
-
-            })
+        executeSearch(false, books)
     }
 }
 
