@@ -1,9 +1,22 @@
 const cardsPlace = document.getElementById('cards-place');
 
-const getValueSearch = function() {
+const warning = {
+    DOM: document.getElementById('warning'),
+    reset: function () { this.DOM.innerHTML = '' },
+    print: function () {
+        this.DOM.innerHTML = `
+        The search has no results. Try searching for a valid ${researchType[getValueType()].type}
+        in the page <a href = 'https://openlibrary.org${researchType[getValueType()].urlToSite}'
+        target ='_blank'> Open Library </a>
+    `
+    },
+}
+
+
+const getValueSearch = function () {
     return document.getElementById('search-input').value;
 }
-const getValueType = function() {
+const getValueType = function () {
     return document.getElementById('search-type').value;
 }
 
@@ -28,4 +41,4 @@ const researchType = {
 }
 
 
-export { cardsPlace, getValueSearch, getValueType, researchType }
+export { cardsPlace, warning, getValueSearch, getValueType, researchType }

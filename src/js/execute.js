@@ -5,14 +5,14 @@ import setProperty from "./components/handleObj-component";
 import { Card, Placeholder } from './components/DOMs-component';
 import * as cf from './config';
 
-const warning = document.getElementById('warning');
+
 
 
 export function executeSearch(isFirstSearch, research) {
     if (isFirstSearch) {
         console.log(research)
         cf.cardsPlace.innerHTML = '';
-        warning.innerHTML = '';
+        cf.warning.reset();
         filter.report.fill(`trovati 0 libri`);
     }
     let placeholder = new Placeholder();
@@ -25,11 +25,7 @@ export function executeSearch(isFirstSearch, research) {
                 filter.report.fill(`trovati ${library.count} libri`);
 
                 if (!library.count) {
-                    warning.innerHTML = `
-                    The search has no results. Try searching for a valid ${cf.researchType[cf.getValueType()].type}
-                    in the page <a href = 'https://openlibrary.org${cf.researchType[cf.getValueType()].urlToSite}'
-                    target ='_blank'> Open Library </a>`;
-
+                    cf.warning.print()
 
                 };
 
