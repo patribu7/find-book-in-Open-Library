@@ -1,4 +1,4 @@
-import SearchParameters from "../components/search-component";
+import SearchParameters from "../input/search-component";
 // l'elemento DOM di ogni libro da visualizzare a schermo
 export class Card {
     constructor(book) {

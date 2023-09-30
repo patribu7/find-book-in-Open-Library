@@ -1,8 +1,8 @@
-import * as filter from "./components/filters-component";
-import replaceButton from "./components/btn-component";
+import * as filter from "./components/control/filters-component";
+import replaceButton from "./components/control/btn-component";
 
-import setProperty from "./components/handleObj-component";
-import { Card, Placeholder } from './components/DOMs-component';
+import setProperty from "./components/data/setProperty";
+import { Card, Placeholder } from './components/output/DOMs-component';
 
 
 export function execute(isFirstSearch, research, warning, placeForCards) {

@@ -1,10 +1,11 @@
 import ndCover from "./image-component"
-import { getValueType } from "../config";
-import * as cf from '../config';
+import { getValueType } from "../../getValues";
+import { researchType } from "../../reserchType";
 
-// manipolazione degli oggetti ottenuti interrobgando le API per poter ottenere i dati voluti: numero dei libri totali trovati, url della copertina, lista autori
+
+// manipolazione degli oggetti ottenuti interrogando le API per poter ottenere i dati voluti: numero dei libri totali trovati, url della copertina, lista autori
 export default function setProperty(library) {
-    if (getValueType() === cf.researchType.subject) {
+    if (getValueType() === researchType.subject) {
         library.works.count = library.work_count;
         library.works.forEach(book => {
             if (book.cover_id != null) {

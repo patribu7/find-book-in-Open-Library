@@ -1,5 +1,5 @@
-import { execute } from "../execute";
-import * as cf from "../config"
+import { execute } from "../../execute";
+import * as placeOf from "../../getPlaceOf"
 
 // il bottone per lo scrolling infinito
 class BtnScroll {
@@ -19,14 +19,14 @@ class BtnScroll {
     }
     showOthers(books) {
         books.offset = books.offset + books.limit;
-        execute(false, books, cf.warning, cf.cardsPlace)
+        execute(false, books, placeOf.warning, placeOf.cards)
     }
 }
 
 export default function replaceButton(research) {
     let scrolling = new BtnScroll();
     $('#btn-scroll').remove();
-    scrolling.createIn(cf.cardsPlace.DOM);
+    scrolling.createIn(placeOf.cards.DOM);
     $('#btn-scroll').on('click', () => scrolling.showOthers(research))
 
 }
