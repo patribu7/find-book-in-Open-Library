@@ -7,12 +7,12 @@ import { Card, Placeholder } from './components/DOMs-component';
 
 export function execute(isFirstSearch, research, warning, placeForCards) {
     if (isFirstSearch) {
-        placeForCards.innerHTML = '';
+        placeForCards.reset();
         warning.reset();
         filter.report.print(`trovati 0 libri`);
     }
     let placeholder = new Placeholder();
-    placeholder.createIn(placeForCards)
+    placeholder.createIn(placeForCards.DOM)
 
     research.get()
         .then(library => setProperty(library))
@@ -33,7 +33,7 @@ export function execute(isFirstSearch, research, warning, placeForCards) {
 
             library.forEach(book => {
                 let card = new Card(book);
-                card.createIn(placeForCards);
+                card.createIn(placeForCards.DOM);
             })
         })
         .catch((error) => {

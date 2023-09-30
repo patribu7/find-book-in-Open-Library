@@ -1,4 +1,8 @@
-const cardsPlace = document.getElementById('cards-place');
+const cardsPlace = {
+    DOM: document.getElementById('cards-place'),
+    reset: function() { this.DOM.innerHTML = '' }
+
+}
 
 const warning = {
     DOM: document.getElementById('warning'),

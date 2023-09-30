@@ -26,7 +26,7 @@ class BtnScroll {
 export default function replaceButton(research) {
     let scrolling = new BtnScroll();
     $('#btn-scroll').remove();
-    scrolling.createIn(cf.cardsPlace);
+    scrolling.createIn(cf.cardsPlace.DOM);
     $('#btn-scroll').on('click', () => scrolling.showOthers(research))
 
 }
