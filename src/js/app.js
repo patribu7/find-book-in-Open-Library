@@ -8,7 +8,7 @@ import '../scss/styles.scss';
 import * as bootstrap from 'bootstrap';
 
 //----------------------------//
-import { executeSearch } from './execute';
+import { execute } from './execute';
 import SearchParameters from "./components/search-component";
 import * as cf from './config';
 
@@ -19,12 +19,12 @@ searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         let research = new SearchParameters(cf.getValueType(), cf.getValueSearch());
         e.preventDefault();
-        executeSearch(true, research)
+        execute(true, research, cf.warning, cf.cardsPlace)
     }
 })
 
 searchButton.addEventListener('click', () => {
     let research = new SearchParameters(cf.getValueType(), cf.getValueSearch());
-    executeSearch(true, research);
+    execute(true, research, cf.warning, cf.cardsPlace);
 
 })

@@ -1,6 +1,8 @@
-import { executeSearch } from "../execute";
+import { execute } from "../execute";
+import * as cf from "../config"
+
 // il bottone per lo scrolling infinito
-export default class BtnScroll {
+class BtnScroll {
     constructor() {
         this.text = 'SHOW MORE';
         this.id = 'btn-scroll';
@@ -17,7 +19,14 @@ export default class BtnScroll {
     }
     showOthers(books) {
         books.offset = books.offset + books.limit;
-        executeSearch(false, books)
+        execute(false, books, cf.warning, cf.cardsPlace)
     }
 }
 
+export default function replaceButton(research) {
+    let scrolling = new BtnScroll();
+    $('#btn-scroll').remove();
+    scrolling.createIn(cf.cardsPlace);
+    $('#btn-scroll').on('click', () => scrolling.showOthers(research))
+
+}

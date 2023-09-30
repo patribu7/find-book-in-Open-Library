@@ -3,13 +3,13 @@ class FilterReport {
     constructor() {
         this.DOM = document.getElementById('filter-report');
     }
-    fill(text) {
+    print(text) {
         this.DOM.innerHTML = text 
     }
 }
 
 const report = new FilterReport()
-report.fill('trovati 0 libri')
+report.print('trovati 0 libri') //cancalla
 
 
 
