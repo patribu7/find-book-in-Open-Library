@@ -11,6 +11,4 @@ class FilterReport {
 const report = new FilterReport()
 report.print('trovati 0 libri') //cancalla
 
-
-
 export {report}

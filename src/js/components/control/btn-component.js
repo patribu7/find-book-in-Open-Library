@@ -7,7 +7,6 @@ class BtnScroll {
         this.text = 'SHOW MORE';
         this.id = 'btn-scroll';
         this.width = '100%';
-
     }
     createIn(place) {
         this.btn = document.createElement('button');

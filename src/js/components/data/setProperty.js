@@ -1,7 +1,6 @@
 import ndCover from "./image-component"
 import { getValueType } from "../../getValues";
-import { researchType } from "../../reserchType";
-
+import { researchType } from "../../researchType";
 
 // manipolazione degli oggetti ottenuti interrogando le API per poter ottenere i dati voluti: numero dei libri totali trovati, url della copertina, lista autori
 export default function setProperty(library) {
@@ -16,8 +15,6 @@ export default function setProperty(library) {
 
             book.authorsList = [];
             book.authors.forEach(author => book.authorsList.push(author.name));
-
-
         });
         return library.works
 
@@ -32,8 +29,6 @@ export default function setProperty(library) {
             }
 
             book.authorsList = book.author_name;
-
-
         })
         return library.docs
     }

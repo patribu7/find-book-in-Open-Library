@@ -2,8 +2,8 @@ import * as filter from "./components/control/filters-component";
 import replaceButton from "./components/control/btn-component";
 
 import setProperty from "./components/data/setProperty";
-import { Card, Placeholder } from './components/output/DOMs-component';
-
+import { Card } from './components/output/card-component';
+import Placeholder from "./components/output/placeholder-component";
 
 export function execute(isFirstSearch, research, warning, placeForCards) {
     if (isFirstSearch) {
@@ -22,14 +22,10 @@ export function execute(isFirstSearch, research, warning, placeForCards) {
 
                 if (!library.count) {
                     warning.print()
-
                 };
-
                 replaceButton(research)
-
             };
             replaceButton(research);
-
 
             library.forEach(book => {
                 let card = new Card(book);

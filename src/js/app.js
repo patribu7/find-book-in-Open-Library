@@ -20,7 +20,7 @@ searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         let research = new SearchParameters(getValueType(), getValueSearch());
         e.preventDefault();
-        execute(true, research, cf.warning, cf.cardsPlace)
+        execute(true, research, placeOf.warning, placeOf.cards)
     }
 })
 

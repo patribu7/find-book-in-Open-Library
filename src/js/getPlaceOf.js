@@ -1,4 +1,5 @@
-import { researchType } from "./reserchType"
+import { researchType } from "./researchType"
+import { getValueType } from "./getValues"
 
 const cards = {
     DOM: document.getElementById('cards-place'),
