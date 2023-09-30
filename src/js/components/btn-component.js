@@ -1,5 +1,5 @@
 import { executeSearch } from "../execute";
-
+// il bottone per lo scrolling infinito
 export default class BtnScroll {
     constructor() {
         this.text = 'SHOW MORE';
@@ -15,7 +15,6 @@ export default class BtnScroll {
         this.btn.id = this.id;
         $(this.btn).insertAfter(place);
     }
-
     showOthers(books) {
         books.offset = books.offset + books.limit;
         executeSearch(false, books)
