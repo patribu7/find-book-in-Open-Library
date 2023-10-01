@@ -1,5 +1,5 @@
 import { execute } from "../../execute";
-import * as placeOf from "../../getPlaceOf"
+import * as placeOf from "../control/getPlaceOf"
 
 // il bottone per lo scrolling infinito
 class BtnScroll {

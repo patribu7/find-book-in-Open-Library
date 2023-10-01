@@ -1,6 +1,6 @@
 import ndCover from "./image-component"
-import { getValueType } from "../../getValues";
-import { researchType } from "../../researchType";
+import { getValueType } from "./getValues";
+import { researchType } from "./researchType";
 
 // manipolazione degli oggetti ottenuti interrogando le API per poter ottenere i dati voluti: numero dei libri totali trovati, url della copertina, lista autori
 export default function setProperty(library) {
