@@ -1,3 +1,5 @@
+// ottengo degli specifici elementi html. Il contenitore dove appariranno i libri e dove apparira' un avviso in caso la ricerca non sia andata a buon fine
+
 import { researchType } from "../data/researchType"
 import { getValueType } from "../data/getValues"
 

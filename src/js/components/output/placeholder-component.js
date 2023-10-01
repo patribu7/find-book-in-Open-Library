@@ -1,4 +1,4 @@
-// loading di caricamento
+// loading di caricamento durante la richiesta alle API
 export default class Placeholder {
     constructor() {
         this.class = 'card';

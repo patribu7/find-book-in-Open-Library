@@ -1,6 +1,5 @@
 import * as filter from "./components/control/filters-component";
 import replaceButton from "./components/control/btn-component";
-
 import setProperty from "./components/data/setProperty";
 import { Card } from './components/output/card-component';
 import Placeholder from "./components/output/placeholder-component";
@@ -9,7 +8,7 @@ export function execute(isFirstSearch, research, warning, placeForCards) {
     if (isFirstSearch) {
         placeForCards.reset();
         warning.reset();
-        filter.report.print(`trovati 0 libri`);
+        filter.report.reset();
     }
     let placeholder = new Placeholder();
     placeholder.createIn(placeForCards.DOM)
