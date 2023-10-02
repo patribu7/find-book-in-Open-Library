@@ -1,6 +1,6 @@
 
 import './components/data/image-component';
-import './components/control/btn-component';
+import './components/output/btn-component';
 import '../css/style.css';
 import '../scss/styles.scss';
 
