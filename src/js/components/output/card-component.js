@@ -1,6 +1,6 @@
 import SearchParameters from "../input/search-component";
 import { Popup } from "./popup-component";
-// l'elemento DOM di ogni libro da visualizzare a schermo
+// l'elemento HTML di ogni libro da visualizzare a schermo
 export class Card {
     constructor(book) {
         this.key = book.key;

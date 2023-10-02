@@ -4,7 +4,6 @@ import './components/output/btn-component';
 import '../css/style.css';
 import '../scss/styles.scss';
 
-// Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap';
 
 //----------------------------//
