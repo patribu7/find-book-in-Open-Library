@@ -1,4 +1,4 @@
-// dizionario per contestualizzare i dati quando la ricerca non va a buion fine
+// dizionario per contestualizzare i dati quando la ricerca non va a buon fine
 
 export const researchType = {
     'subject': '/subjects/',

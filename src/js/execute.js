@@ -17,12 +17,11 @@ export function execute(isFirstSearch, research, warning, placeForCards) {
         .then(library => setProperty(library))
         .then(library => {
             if (isFirstSearch) {
-                filter.report.print(`trovati ${library.count} libri`);
+                filter.report.print(library.count);
 
                 if (!library.count) {
                     warning.print()
                 };
-                replaceButton(research)
             };
             replaceButton(research);
 

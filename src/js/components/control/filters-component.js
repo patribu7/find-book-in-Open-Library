@@ -3,15 +3,15 @@ class FilterReport {
     constructor() {
         this.DOM = document.getElementById('filter-report');
     }
-    reset(){
+    reset() {
         this.DOM.innerHTML = `trovati 0 libri`
     }
 
-    print(text) {
-        this.DOM.innerHTML = text 
+    print(n) {
+        this.DOM.innerHTML = `trovati ${n} libri`
     }
 }
 
 const report = new FilterReport()
 
-export {report}
+export { report }
