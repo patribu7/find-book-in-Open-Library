@@ -10,7 +10,7 @@ import * as bootstrap from 'bootstrap';
 //----------------------------//
 import { execute } from './execute';
 import SearchParameters from "./components/input/search-component";
-import { getValueSearch, getValueType } from './components/data/getValues';
+import { getValueSearch, getValueType } from './components/input/getValues';
 import * as placeOf from './components/control/getPlaceOf';
 
 const searchInput = document.getElementById('search-input');

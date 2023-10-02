@@ -1,4 +1,4 @@
-// Ottengo il volare nella barra di ricerca e nell'input di selezione
+// Ottiene il volare della barra di ricerca e dell'input di selezione
 
 const getValueSearch = function () {
     return document.getElementById('search-input').value;

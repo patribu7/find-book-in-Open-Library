@@ -1,5 +1,6 @@
-import * as filter from "./components/control/filters-component";
-import replaceButton from "./components/control/btn-component";
+// esegue l'insieme dei comandi
+import * as filter from "./components/control/filters";
+import replaceButton from "./components/output/btn-component";
 import setProperty from "./components/data/setProperty";
 import { Card } from './components/output/card-component';
 import Placeholder from "./components/output/placeholder-component";
